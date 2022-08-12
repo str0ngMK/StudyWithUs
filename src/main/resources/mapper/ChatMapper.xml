@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.swu.mapper.ChatMapper">
+
+	<select id="selectRoomList" resultType="com.swu.vo.TRoom">
+		SELECT
+			  A.RNO AS rno,        
+			  A.RNAME AS rname,       
+			  A.ROWNER AS rowner,     
+			  A.MAX_USER AS maxUser,   
+			  A.CUR_USER AS curUser,   
+			  A.DEL_YN AS delYn,     
+			  A.INSERT_DATE AS insertDate,
+			  A.MODIFY_DATE AS modifyDate,
+			  A.IMAGE_URL AS imageUrl
+		 FROM TROOM A  
+		WHERE A.DEL_YN = '0'
+	</select>
+	
+	<insert id="insertRoomInfo" parameterType="com.swu.vo.TRoom">
+		INSERT INTO TROOM 
+				   (RNO,
+					RNAME,
+					PASSWORD,
+					CATEGORY,
+					ROWNER,
+					MAX_USER,
+					CUR_USER)
+			VALUES (NULL,
+					#{rname},
+					#{password},
+					#{category},
+					'관리자',
+					#{maxUser},
+					1)
+	</insert>
+	
+	<update id="updateRoomInfo" parameterType="com.swu.vo.TRoom">
+		UPDATE TROOM 
+		   SET DEL_YN = '1'
+		 WHERE RNO = #{rno}
+	</update>
+	
+</mapper>
