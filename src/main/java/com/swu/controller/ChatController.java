@@ -18,6 +18,7 @@ import com.swu.service.ChatService;
 import com.swu.vo.TRoom;
 
 @Controller
+@RequestMapping("/")
 public class ChatController {
 	
 	@Resource(name = "chatService")
@@ -201,17 +202,19 @@ public class ChatController {
 	
 	// TestSelect (임시)
 	@RequestMapping("/index")
-	public ModelAndView index() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("index");
-		List<HashMap<String, Object>> testList = chatService.selectTest();
-		mv.addObject("list", testList);
-		return mv;
+	public String index() {
+//		ModelAndView mv = new ModelAndView();
+//		mv.setViewName("index");
+//		List<HashMap<String, Object>> testList = chatService.selectTest();
+//		mv.addObject("list", testList);
+//		return mv;
+		return "index";
 	}
 	
 	@RequestMapping("/createRoomPage")
 	public String createRoom() {
 		return "createroom";
 	}
+	
 	
 }

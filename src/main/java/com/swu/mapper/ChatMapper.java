@@ -14,5 +14,5 @@ public interface ChatMapper {
 	public List<TRoom> selectRoomList();
 	
 	public int updateRoomInfo(TRoom room);
-
+	
 }

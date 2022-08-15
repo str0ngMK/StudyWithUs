@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.swu.mapper.NoticeDAO">
+	
+	<select id="nlist" resultType="com.swu.vo.NoticeVO">
+		select n_num, n_title, n_date from notice_tbl
+	</select>
+	
+	<insert id="nwrite" parameterType="com.swu.vo.NoticeVO">
+		insert into notice_tbl(n_title, n_content) values (#{n_title}, #{n_content})
+	</insert>
+	
+	<select id="nview" parameterType="int" resultType="com.swu.vo.NoticeVO">
+		select n_num, n_title, n_content 
+		from notice_tbl
+		where n_num = #{n_num}
+	</select>
+	
+	<update id="nmodify" parameterType="com.swu.vo.NoticeVO">
+		update notice_tbl
+		set
+		n_title = #{n_title},
+		n_content = #{n_content}
+		where n_num = #{n_num}	
+	</update>
+	
+	<delete id="ndelete" parameterType="int">
+		delete from notice_tbl
+		where n_num = #{n_num}
+	</delete>
+	
+	<select id="count" resultType="int">
+		select count(n_num)
+		from notice_tbl
+	</select>
+	
+	<select id="listPage" parameterType="hashMap" resultType="com.swu.vo.NoticeVO">
+		select n_num, n_title, n_content
+		from notice_tbl
+		order by n_num desc
+		limit #{displayPost}, #{postNum}
+	</select>
+</mapper>
