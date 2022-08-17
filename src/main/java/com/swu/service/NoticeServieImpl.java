@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.swu.mapper.NoticeDAO;
@@ -44,5 +45,16 @@ public class NoticeServieImpl implements NoticeService{
 		dao.ndelete(n_num);
 	}
 
+	@Override
+	public int count() throws Exception {
+		
+		return dao.count();
+	}
+	
+	// 게시물 목록 + 페이징
+	@Override
+	public List<NoticeVO> listPage(@Param("displayPost")int displayPost, @Param("postNum")int postNum) throws Exception {
+	 return dao.listPage(displayPost, postNum);
+	}
 
 }

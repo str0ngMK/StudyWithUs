@@ -37,7 +37,7 @@
 	</select>
 	
 	<select id="listPage" parameterType="hashMap" resultType="com.swu.vo.NoticeVO">
-		select n_num, n_title, n_content
+		select n_num, n_title, n_date
 		from notice_tbl
 		order by n_num desc
 		limit #{displayPost}, #{postNum}

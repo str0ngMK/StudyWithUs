@@ -1,9 +1,11 @@
 package com.swu.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 
 import com.swu.vo.NoticeVO;
@@ -46,4 +48,20 @@ public class NoticeDAOImpl implements NoticeDAO{
 		
 	}
 
+	@Override
+	public int count() throws Exception {
+		return sql.selectOne(namespace + ".count");
+	}
+	
+	// 게시물 목록 + 페이징
+	@Override
+	public List<NoticeVO> listPage(@Param("displayPost")int displayPost, @Param("postNum")int postNum) throws Exception {
+
+	 HashMap<String, Integer> data = new HashMap<String, Integer>();
+	  
+	 data.put("displayPost", displayPost);
+	 data.put("postNum", postNum);
+	  
+	 return sql.selectList(namespace + ".listPage", data);
+	}
 }

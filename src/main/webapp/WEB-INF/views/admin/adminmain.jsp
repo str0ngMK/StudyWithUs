@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ include file="../includes/admin_sidebar.jsp" %>
+<%@ include file="../includes/adminsidebar.jsp" %>
 <div class="container">
         <div class="header">
             <div class="circle">관</div>
