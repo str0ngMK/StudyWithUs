@@ -40,7 +40,7 @@ public class MemberController {
 		} else {
 			session.setAttribute("member", login);
 		}
-		return "redirect:/";
+		return "/room";
 	}
 
 	// 화면에 로그인창 보이게하기
