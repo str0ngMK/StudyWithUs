@@ -103,5 +103,5 @@ public class TRoom {
 	public void setModifyDate(Timestamp modifyDate) {
 		this.modifyDate = modifyDate;
 	}
-
+	
 }

@@ -11,7 +11,7 @@ public interface ChatService {
 
 	public int insertRoomInfo(TRoom room);
 
-	public List<TRoom> selectRoomList();
+	public List<TRoom> selectRoomList(HashMap<Object, Object> params);
 
 	public int UpdateRoomInfo(TRoom tRoom);
 

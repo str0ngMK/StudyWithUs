@@ -11,7 +11,7 @@ public interface ChatMapper {
 
 	public int insertRoomInfo(TRoom room);
 
-	public List<TRoom> selectRoomList();
+	public List<TRoom> selectRoomList(HashMap<Object, Object> params);
 	
 	public int updateRoomInfo(TRoom room);
 
