@@ -47,7 +47,7 @@
  -->
 
 <body>
-<form action="/createRoom1" method="post">
+<form action="/createRoom.do" method="post">
 <table>
 	<tr>
 		<td class="tleft">방 제목</td>
@@ -68,7 +68,6 @@
 		<td class="tleft">인원수</td>
 		<td class="tright">
 			<select name="userCount">
-				<option>1</option>
 				<option>2</option>
 				<option>3</option>
 				<option>4</option>

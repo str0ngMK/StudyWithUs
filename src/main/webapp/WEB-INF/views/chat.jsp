@@ -116,7 +116,7 @@
 	
 	function delete_btn(){
 		var rNumber = $("#roomNumber").val();
-		window.location.href = "/deleteRoom?no=" + rNumber;	
+		window.location.href = "/deleteRoom.do?no=" + rNumber;	
 	}
 	
 </script>

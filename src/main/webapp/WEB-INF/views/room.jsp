@@ -68,6 +68,12 @@
 		}
 		.test{
 			margin-right: 30px;
+			margin-top : 10px;
+		}
+		.testname:hover{					/* 방 제목 */
+			text-decoration: underline;		/* 밑줄 */
+			cursor : pointer;				/* 손구락 */
+			font-weight: bold;				/* 두껍게 */
 		}
 	</style>
 </head>
@@ -80,13 +86,13 @@
 	}
 
 	function getRoom(){
-		commonAjax('/getRoom', "", 'post', function(result){
+		commonAjax('/getRoom.do', "", 'post', function(result){
 			createChatingRoom(result);
 		});
 	}
 	
 	function createRoomPage(){
-		location.href = "/createRoomPage";
+		location.href = "/createRoomPage.do";
 /* 		$("#createRoom").click(function(){
 			var msg = {	roomName : $('#roomName').val()	};
 
@@ -99,7 +105,7 @@
 	}
 
 	function goRoom(number, name){
-		location.href="/moveChating?roomName="+name+"&"+"roomNumber="+number;
+		location.href="/moveChating.do?roomName="+name+"&"+"roomNumber="+number;
 	}
 
 // 	function createChatingRoom(res){
@@ -128,8 +134,9 @@
 /* 				tag += "<td class='roomImg'><img src=" + roomImg + "/></td>";
 				tag += "<td class='go'><button type='button' onclick='goRoom(\""+roomNumber+"\", \""+rn+"\")'>참여</button></td>";	 */
  				
-				tag += "<div class='test'><img src=" + roomImg + "/><br><button type='button' onclick='goRoom(\""+roomNumber+"\", \""+rn+"\")'>참여</button></div>";
+				tag += "<div class='test'><img src=" + roomImg + "/><br><a class='testname' onclick='goRoom(\""+roomNumber+"\", \""+rn+"\")'>" + rn + "</a></div>";
 			});
+// 			$("#roomList").empty().append(tag);
 			$("#roomList").empty().append(tag);
 		}
 	}
@@ -149,6 +156,13 @@
 			}
 		});
 	}
+	
+	function searchRoomPage(){
+		var data = {'roomName' : $('#roomName').val()};
+		commonAjax('/getRoom.do', data, 'post', function(result){
+			createChatingRoom(result);
+		});
+	}
 </script>
 <body>
 	<div class="container">
@@ -157,7 +171,7 @@
 				<tr>
 					<th>방 제목</th>
 					<th><input type="text" name="roomName" id="roomName"></th>
-					<th><button>검색</button>
+					<th><button onclick="searchRoomPage();">검색</button>
 					<th><button onclick="createRoomPage();">방 생성</button></th>
 				</tr>
 			</table>

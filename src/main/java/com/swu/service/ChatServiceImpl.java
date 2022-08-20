@@ -26,8 +26,8 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public List<TRoom> selectRoomList() {
-		return mapper.selectRoomList();
+	public List<TRoom> selectRoomList(HashMap<Object, Object> params) {
+		return mapper.selectRoomList(params);
 	}
 
 	@Override

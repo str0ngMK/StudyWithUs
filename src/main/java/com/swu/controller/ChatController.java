@@ -26,7 +26,7 @@ public class ChatController {
 	List<TRoom> roomList = new ArrayList<TRoom>();
 	static int roomNumber = 0;
 
-	@RequestMapping("/chat")
+	@RequestMapping("/chat.do")
 	public ModelAndView chat() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("chat");
@@ -37,7 +37,7 @@ public class ChatController {
 	 * 방 페이지
 	 * @return
 	 */
-	@RequestMapping("/room")
+	@RequestMapping("/room.do")
 	public ModelAndView TRoom() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("room");
@@ -49,7 +49,7 @@ public class ChatController {
 	 * @param params
 	 * @return
 	 */
-	@RequestMapping("/createRoom1")
+	@RequestMapping("/createRoom.do")
 	public ModelAndView createRoom1(@RequestParam HashMap<Object, Object> params) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/message");
@@ -134,18 +134,19 @@ public class ChatController {
 	 * @param params
 	 * @return
 	 */
-	@RequestMapping("/getRoom")
+	@RequestMapping("/getRoom.do")
 	public @ResponseBody List<TRoom> getRoom(@RequestParam HashMap<Object, Object> params) {
-		List<TRoom> list = chatService.selectRoomList();
+		List<TRoom> list = chatService.selectRoomList(params);
 		roomList = list;
-		return roomList;
+		
+		return list;
 	}
 
 	/**
 	 * 채팅방
 	 * @return
 	 */
-	@RequestMapping("/moveChating")
+	@RequestMapping("/moveChating.do")
 	public ModelAndView chating(@RequestParam HashMap<Object, Object> params) {
 		ModelAndView mv = new ModelAndView();
 		int roomNumber = Integer.parseInt((String) params.get("roomNumber"));
@@ -166,7 +167,7 @@ public class ChatController {
 	 * 채팅방 삭제하기
 	 * @return
 	 * **/
-	@RequestMapping("/deleteRoom")
+	@RequestMapping("/deleteRoom.do")
 	public ModelAndView deleteRoom(@RequestParam String no) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/message");
@@ -199,19 +200,22 @@ public class ChatController {
 		return mv;
 	}
 	
-	// TestSelect (임시)
-	@RequestMapping("/index")
-	public ModelAndView index() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("index");
-		List<HashMap<String, Object>> testList = chatService.selectTest();
-		mv.addObject("list", testList);
-		return mv;
-	}
-	
-	@RequestMapping("/createRoomPage")
+	/**
+	 * 채팅방 생성하기 페이지 이동
+	 * @return
+	 */
+	@RequestMapping("/createRoomPage.do")
 	public String createRoom() {
 		return "createroom";
+	}
+	
+	/**
+	 * 고객센터 페이지 이동
+	 * @return
+	 */
+	@RequestMapping("/serviceCenter.do")
+	public String serviceCenter() {
+		return "serviceCenter";
 	}
 	
 }

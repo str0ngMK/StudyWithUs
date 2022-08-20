@@ -5,7 +5,7 @@
 	
 <mapper namespace="com.swu.mapper.ChatMapper">
 
-	<select id="selectRoomList" resultType="com.swu.vo.TRoom">
+	<select id="selectRoomList" resultType="com.swu.vo.TRoom" parameterType="HashMap">
 		SELECT
 			  A.RNO AS rno,        
 			  A.RNAME AS rname,       
@@ -18,6 +18,9 @@
 			  A.IMAGE_URL AS imageUrl
 		 FROM TROOM A  
 		WHERE A.DEL_YN = '0'
+		<if test="roomName != null and roomName != ''">
+		  AND A.RNAME LIKE CONCAT('%', #{roomName}, '%')
+		</if>
 	</select>
 	
 	<insert id="insertRoomInfo" parameterType="com.swu.vo.TRoom">
