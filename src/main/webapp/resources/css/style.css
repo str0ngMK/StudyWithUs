@@ -1,0 +1,794 @@
+@charset "UTF-8";
+
+/*0.전체 설정*/
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+*{margin: 0; padding: 0; box-sizing: border-box;}
+body{
+  width: 960px;
+  height: 1200px;
+  font-family: 'Nanum Gothic', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background:url("./image/chocolate.jpg") no-repeat center;
+  background-color: cover;
+  overflow: scroll;
+  margin: 0px auto;
+}
+
+/*body::before {
+  content: "";
+  position: absolute; z-index: 1;
+  top: 0; right: 0; bottom: 0; left: 0;
+}*/
+
+/*1.로그인*/
+.login-form {
+   position: relative; z-index: 2;
+}
+.login-form h1 {
+   font-size: 32px; color: black;text-align: center;
+  margin-bottom: 60px;
+  }
+.int-area {width: 400px; position: relative;
+  margin-top: 20px;
+}
+.int-area:first-child{margin-top: 0;}
+.int-area input {
+  width: 100%;
+  padding: 20px 10px 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #999;
+  font-size: 18px; color: black;
+  outline: none;
+}
+.int-area label{
+  position: absolute; left: 10px; top: 15px;
+  font-size: 18px; color: #999; 
+  transition: all .5s ease;
+}
+.int-area label.warning {
+  color: red !important;
+  animation: warning .3s ease;
+  animation-iteration-count: 3;
+}
+@keyframes warning {
+  0% {transform: translateX(-8px);}
+  25% {transform: translateX(8px);}
+  50% {transform: translateX(-8px);}
+  75% {transform: translateX(8px);}
+}
+.int-area input:focus + label,
+.int-area input:valid + label {
+  top:-2px;
+  font-size: 13px; color: rgb(165, 99, 191);
+}
+.btn-area{
+  margin-top :30px;
+}
+.btn-area button {
+  width: 100%; height: 50px;
+  background : rgb(165, 99, 191);
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.caption {
+  margin-top: 20px;
+  text-align: center;
+}
+.caption a {
+  font-size: 15px;
+  color: #999;
+  text-decoration: none;
+}
+
+
+/*2.아이디찾기*/
+.findId-form {
+  position: relative; z-index: 2;
+}
+.findId-form h1 {
+  font-size: 32px; color: black;text-align: center;
+ margin-bottom: 60px;
+ }
+
+ .int-area2 {width: 400px; position: relative;
+  margin-top: 20px;
+}
+.int-area2:first-child{margin-top: 0;}
+.int-area2 input {
+  width: 100%;
+  padding: 20px 10px 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #999;
+  font-size: 18px; color: black;
+  outline: none;
+}
+
+.int-area2 label{
+  position: absolute; left: 10px; top: 15px;
+  font-size: 18px; color: #999; 
+  transition: all .5s ease;
+}
+
+.int-area2 label.warning {
+  color: red !important;
+  animation: warning .3s ease;
+  animation-iteration-count: 3;
+}
+@keyframes warning {
+  0% {transform: translateX(-8px);}
+  25% {transform: translateX(8px);}
+  50% {transform: translateX(-8px);}
+  75% {transform: translateX(8px);}
+}
+.int-area2 input:focus + label,
+.int-area2 input:valid + label {
+  top:-2px;
+  font-size: 13px; color: rgb(165, 99, 191);
+}
+
+.btn-area2{
+  margin-top :20px;
+  display: flex;
+}
+.btn-area2 button {
+  width: 100%; height: 50px;
+  background : rgb(165, 99, 191);
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 5%;
+}
+
+/*3.비밀번호 찾기*/
+.findPwd-form {
+  position: relative; z-index: 2;
+}
+.findPwd-form h1 {
+  font-size: 32px; color: black;text-align: center;
+ margin-bottom: 60px;
+ }
+
+ .int-area3 {width: 400px; position: relative;
+  margin-top: 20px;
+}
+.int-area3:first-child{margin-top: 0;}
+.int-area3 input {
+  width: 100%;
+  padding: 20px 10px 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #999;
+  font-size: 18px; color: black;
+  outline: none;
+}
+
+.int-area3 label{
+  position: absolute; left: 10px; top: 15px;
+  font-size: 18px; color: #999; 
+  transition: all .5s ease;
+}
+
+.int-area3 label.warning {
+  color: red !important;
+  animation: warning .3s ease;
+  animation-iteration-count: 3;
+}
+@keyframes warning {
+  0% {transform: translateX(-8px);}
+  25% {transform: translateX(8px);}
+  50% {transform: translateX(-8px);}
+  75% {transform: translateX(8px);}
+}
+
+.int-area3 input:focus + label,
+.int-area3 input:valid + label {
+  top:-2px;
+  font-size: 13px; color: rgb(165, 99, 191);
+}
+
+.btn-area3{
+  margin-top :20px;
+  display: flex;
+}
+.btn-area3 button {
+  width: 100%; height: 50px;
+  background : rgb(165, 99, 191);
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 5%;
+}
+
+/* 4. 회원가입 약관동의*/
+
+.join-agree {
+  height: 1200px;
+}
+.join-agree h1, h2 {
+font-size: 32px; color: black;text-align: center;
+ margin-bottom: 30px;
+ height: 100px;
+ }
+
+ .box1 {
+  width:450px;
+  height:400px;
+  overflow:auto;
+  border:1px solid black;
+  padding: 0 0.5em;
+}
+/* 연습)약관동의 부분*/
+/*
+.check input {
+  display: none;
+}
+.check .icon {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background-color: transparent;
+  border: 10px solid #000;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+}
+.check .icon::before, .check .icon::after {
+  content: ''; /*안주면 가상요소가 안나타난다.
+  display: inline-block;
+  width: 20px;
+  height: 0; /*변화값으로 커지게 하기 위해
+  background-color: #ff1100;
+  position: absolute;
+  transform-origin: left top; /*왼쪽 위 부분 (그어지는 효과를 위해서)
+  border-radius: 5px;
+}
+.check .icon::before {
+  top: 50px;
+  left: 12px;
+  transform: rotate(-45deg);
+}
+.check .icon::after{
+  top: 85px;
+  left: 48px;
+  transform: rotate(-135deg);
+}
+.check input:checked ~ .icon {
+  border-color: #ff1100;
+}
+.check input:checked ~ .icon::before{
+  height: 50px;
+  transition: all .35s ease;
+}
+.check input:checked ~ .icon::after{
+  height: 120px;
+  transition: all .35s ease .35s;
+}
+*/
+
+
+
+/*5. 회원가입 본인인증*/
+.join-form5 {
+  position: relative; z-index: 2;
+}
+.join-form5 h1 {
+  font-size: 32px; color: black;text-align: center;
+ margin-bottom: 60px;
+ }
+
+ .int-area5 {width: 400px; position: relative;
+  margin-top: 20px; text-align: center;
+}
+
+.btn-area5{
+  margin-top :20px;
+  display: flex;
+}
+.btn-area5 button {
+  width: 50%; height: 40px;
+  background : rgb(165, 99, 191);
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 5%;
+}
+
+/*6. 회원가입 본인인증*/
+.authentic {
+  position: relative; z-index: 2;
+}
+.authentic h1 {
+  font-size: 32px; color: black;text-align: center;
+ margin-bottom: 60px;
+ }
+
+ .int-area6 {width: 400px; position: relative;
+  margin-top: 20px;
+}
+.int-area6:first-child{margin-top: 0;}
+.int-area6 input {
+  width: 100%;
+  padding: 20px 10px 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #999;
+  font-size: 18px; color: black;
+  outline: none;
+}
+
+.int-area6 label{
+  position: absolute; left: 10px; top: 15px;
+  font-size: 18px; color: #999; 
+  transition: all .5s ease;
+}
+
+.int-area6 label.warning {
+  color: red !important;
+  animation: warning .3s ease;
+  animation-iteration-count: 3;
+}
+@keyframes warning {
+  0% {transform: translateX(-8px);}
+  25% {transform: translateX(8px);}
+  50% {transform: translateX(-8px);}
+  75% {transform: translateX(8px);}
+}
+
+.int-area6 input:focus + label,
+.int-area6 input:valid + label {
+  top:-2px;
+  font-size: 13px; color: rgb(165, 99, 191);
+}
+
+.int-area6 button {
+  position: fixed; 
+  width: 10%;
+  height: 5%;
+  background : rgb(165, 99, 191);
+  color: #fff;
+  font-size: 15px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.gender{
+  font-size: 18px; color: #999; 
+}
+
+.contact1 {
+  font-size: 18px; color: #999; 
+}
+.contact2 {
+  font-size: 18px; color: #999; 
+}
+
+select {
+  width:100px;
+  padding:5px;
+  margin: 10px 0px 0px 0px;
+  border:1px solid #999;
+  font-family:'Nanumgothic';
+  background:no-repeat 95% 50%;
+  border-radius:3px;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.btn-area6{
+  margin-top :20px;
+  display: flex;
+}
+.btn-area6 button {
+  width: 100%; height: 50px;
+  background : rgb(165, 99, 191);
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 5%;
+}
+
+/*7.인증번호가 올바르지 않은 경우*/
+.notcorrect {
+  position: relative; z-index: 2;
+}
+.notcorrect h1 {
+  font-size: 32px; color: black;text-align: center;
+ margin-bottom: 30px;
+ }
+
+ .int-area7 {width: 400px; position: relative;
+  margin-top: 20px; text-align: center;
+}
+
+.int-area7 img {
+  width: 20%;
+  height: 20%;
+}
+
+.btn-area7{
+  margin-top :20px;
+  display: flex;
+}
+.btn-area7 button {
+  width: 50%; height: 50px;
+  background : rgb(165, 99, 191);
+  color: #fff;
+  font-size: 17px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 5%;
+}
+
+/*8.회원가입양식*/
+.input-form {
+  max-width: 680px;
+
+  margin-top: 80px;
+  padding: 32px;
+
+  background: #fff;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+}
+
+/*9.회원정보관리*/
+.membermanagement {
+  position: relative; z-index: 2;
+}
+.membermanagement h1 {
+  font-size: 32px; color: black;text-align: center;
+ margin-bottom: 60px;
+ }
+.btn-area9 {width: 400px; position: relative;
+ margin-top: 20px;
+}
+.btn-area9:first-child{margin-top: 0;}
+.btn-area9 {
+ width: 100%;
+ padding: 20px 10px 10px;
+ text-align: center;
+}
+.btn-area9 button {
+  width: 50%;
+  height: 30px;
+  border-radius: 25px;
+  border: none;
+  background-color: rgb(165, 99, 191) ;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+.inform {
+margin-top: 10px;
+font-size: 15px;
+
+}
+.int-area label.warning {
+ color: red !important;
+ animation: warning .3s ease;
+ animation-iteration-count: 3;
+}
+@keyframes warning {
+ 0% {transform: translateX(-8px);}
+ 25% {transform: translateX(8px);}
+ 50% {transform: translateX(-8px);}
+ 75% {transform: translateX(8px);}
+}
+.int-area input:focus + label,
+.int-area input:valid + label {
+ top:-2px;
+ font-size: 13px; color: rgb(165, 99, 191);
+}
+.btn-area{
+ margin-top :30px;
+}
+.btn-area button {
+ width: 100%; height: 50px;
+ background : rgb(165, 99, 191);
+ color: #fff;
+ font-size: 20px;
+ border: none;
+ border-radius: 25px;
+ cursor: pointer;
+}
+
+.caption {
+ margin-top: 20px;
+ text-align: center;
+}
+.caption a {
+ font-size: 15px;
+ color: #999;
+ text-decoration: none;
+}
+
+/*10.비밀번호 인증*/
+.authenticpwd {
+  position: relative; z-index: 2;
+}
+.authenticpwd h1 {
+  font-size: 32px; color: black;text-align: center;
+ margin-bottom: 60px;
+ }
+
+ .int-area10 {width: 400px; position: relative;
+  margin-top: 20px;
+}
+.int-area10:first-child{margin-top: 0;}
+.int-area10 input {
+  width: 100%;
+  padding: 20px 10px 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #999;
+  font-size: 18px; color: black;
+  outline: none;
+}
+
+.int-area10 label{
+  position: absolute; left: 10px; top: 15px;
+  font-size: 18px; color: #999; 
+  transition: all .5s ease;
+}
+
+.int-area10 label.warning {
+  color: red !important;
+  animation: warning .3s ease;
+  animation-iteration-count: 3;
+}
+@keyframes warning {
+  0% {transform: translateX(-8px);}
+  25% {transform: translateX(8px);}
+  50% {transform: translateX(-8px);}
+  75% {transform: translateX(8px);}
+}
+
+.int-area10 input:focus + label,
+.int-area10 input:valid + label {
+  top:-2px;
+  font-size: 13px; color: rgb(165, 99, 191);
+}
+
+.btn-area10{
+  margin-top :20px;
+  display: flex;
+}
+.btn-area10 button {
+  width: 100%; height: 50px;
+  background : rgb(165, 99, 191);
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 5%;
+}
+
+/*11.회원정보수정*/
+.modify {
+  position: relative; z-index: 2;
+}
+.modify h1 {
+  font-size: 32px; color: black;text-align: center;
+ margin-bottom: 60px;
+ }
+
+ .int-area11 {width: 400px; position: relative;
+  margin-top: 20px;
+}
+.int-area11:first-child{margin-top: 0;}
+.int-area11 input {
+  width: 100%;
+  padding: 20px 10px 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #999;
+  font-size: 18px; color: black;
+  outline: none;
+}
+
+.int-area11 label{
+  position: absolute; left: 10px; top: 15px;
+  font-size: 18px; color: #999; 
+  transition: all .5s ease;
+  
+}
+
+.int-area11 label.warning {
+  color: red !important;
+  animation: warning .3s ease;
+  animation-iteration-count: 3;
+}
+@keyframes warning {
+  0% {transform: translateX(-8px);}
+  25% {transform: translateX(8px);}
+  50% {transform: translateX(-8px);}
+  75% {transform: translateX(8px);}
+}
+
+.int-area11 input:focus + label,
+.int-area11 input:valid + label {
+  top:-2px;
+  font-size: 20px; color: rgb(165, 99, 191);
+}
+
+.btn-area11{
+  margin-top :20px;
+  display: flex;
+}
+.btn-area11 button {
+  width: 100%; height: 50px;
+  background : rgb(165, 99, 191);
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 5%;
+}
+
+/*12. 비밀번호 변경*/
+.changepwd {
+  position: relative; z-index: 2;
+}
+.changepwd h1 {
+  font-size: 32px; color: black;text-align: center;
+ margin-bottom: 60px;
+ }
+
+ .int-area12 {width: 500px; position: relative;
+  margin-top: 20px;
+}
+.int-area12:first-child{margin-top: 0;}
+.int-area12 input {
+  width: 100%;
+  padding: 20px 10px 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #999;
+  font-size: 18px; color: black;
+  outline: none;
+}
+
+.int-area12 label{
+  position: absolute; left: 10px; top: 15px;
+  font-size: 18px; color: #999; 
+  transition: all .5s ease;
+}
+
+.int-area12 label.warning {
+  color: red !important;
+  animation: warning .3s ease;
+  animation-iteration-count: 3;
+}
+@keyframes warning {
+  0% {transform: translateX(-8px);}
+  25% {transform: translateX(8px);}
+  50% {transform: translateX(-8px);}
+  75% {transform: translateX(8px);}
+}
+
+.int-area12 input:focus + label,
+.int-area12 input:valid + label {
+  top:-2px;
+  font-size: 13px; color: rgb(165, 99, 191);
+}
+
+.btn-area12{
+  margin-top :20px;
+  display: flex;
+}
+.btn-area12 button {
+  width: 100%; height: 50px;
+  background : rgb(165, 99, 191);
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 5%;
+}
+
+/*13. 회원탈퇴*/
+.delete_member {
+  position: relative; z-index: 2;
+}
+.delete_member h1 {
+  font-size: 32px; color: black;text-align: center;
+ margin-bottom: 30px;
+ }
+
+ .int-area13 {width: 400px; position: relative;
+  margin-top: 20px;
+}
+.int-area13:first-child{margin-top: 0;}
+.int-area13  {
+  padding: 20px 10px 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #999;
+  font-size: 18px; color: black;
+  outline: none;
+}
+
+.int-area13 dt {
+  color: red;
+}
+.int-area13 dl {
+  margin-top: 30px;
+}
+
+
+.btn-area13{
+  margin-top :20px;
+  display: flex;
+}
+.btn-area13 button {
+  width: 100%; height: 50px;
+  background : rgb(165, 99, 191);
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 5%;
+}
+
+
+/* 연습) navigationBar 페이지 연습해봄*/
+.gnb-menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+}
+
+.gnb-menu a {
+  font-size: 24px;
+  color: black;
+  text-decoration: none;
+  position: relative;
+  padding: 6px 12px;
+}
+
+.gnb-menu a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 4px;
+  background: #f1c40f;
+  transition: all .5s ease-out;
+}
+.gnb-menu a:hover::after {
+  width: 100%;
+}
+

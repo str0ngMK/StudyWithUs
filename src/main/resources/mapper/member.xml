@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+
+	<resultMap id="memResult" type="com.one.vo.MemberVO">
+		<result property="user_name" column="user_name" />
+		<result property="id" column="id" />
+		<result property="user_pwd" column="user_pwd" />
+		<result property="nickname" column="nickname" />
+		<result property="contact" column="contact" />
+		<result property="email" column="email" />
+		<result property="birth_date" column="birth_date" />
+		<result property="gender" column="gender" />
+		<result property="reg_date" column="reg_date" />
+		<result property="update_date" column="update_date" />
+		<result property="address" column="address" />
+		<result property="authority" column="authority" />
+		<result property="study_time" column="study_time" />
+		<result property="reported_user" column="reported_user" />
+		<result property="to_do_list" column="to_do_list" />
+	</resultMap>
+
+	<!-- 회원가입 -->
+	<insert id="register" parameterType="com.one.vo.MemberVO">
+	<![CDATA[
+		INSERT INTO member_tbl(user_name, id, user_pwd, nickname, contact, email, birth_date, gender, address)
+		VALUES( #{user_name}, #{id}, #{user_pwd}, #{nickname}, #{contact}, #{email}, #{birth_date}, #{gender}, #{address})
+	]]>
+	</insert>
+
+	<!-- 로그인 -->
+	<select id="login" resultType="com.one.vo.MemberVO">
+	<![CDATA[
+		SELECT id, user_pwd
+		FROM
+		member_tbl
+		WHERE id = #{id}
+		AND user_pwd = #{user_pwd}
+		]]>
+	</select>
+
+	<!-- 모든 회원 조회 (가입순 내림차순) -->
+<!-- 	<select id="selectAllMemberList" resultMap="memResult">
+      <![CDATA[
+         select * from member_tbl order by reg_date desc	 	
+      ]]>
+	</select> -->
+
+
+	<update id="updateMember" parameterType="com.one.vo.MemberVO">
+     <![CDATA[
+	     update member_tbl
+	     set user_pwd=#{user_pwd}, user_name=#{user_name}, email=#{email}
+	     where
+	     id=#{id}
+      ]]>
+	</update>
+
+	<delete id="deleteMember" parameterType="String">
+	<![CDATA[
+	   delete from  member_tbl
+	   where
+	   id=#{id}
+	]]>
+	</delete>
+
+</mapper>
