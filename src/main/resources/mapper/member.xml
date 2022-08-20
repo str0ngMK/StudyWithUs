@@ -5,7 +5,7 @@
 
 <mapper namespace="mapper.member">
 
-	<resultMap id="memResult" type="com.one.vo.MemberVO">
+	<resultMap id="memResult" type="com.swu.vo.MemberVO">
 		<result property="user_name" column="user_name" />
 		<result property="id" column="id" />
 		<result property="user_pwd" column="user_pwd" />
@@ -24,7 +24,7 @@
 	</resultMap>
 
 	<!-- 회원가입 -->
-	<insert id="register" parameterType="com.one.vo.MemberVO">
+	<insert id="register" parameterType="com.swu.vo.MemberVO">
 	<![CDATA[
 		INSERT INTO member_tbl(user_name, id, user_pwd, nickname, contact, email, birth_date, gender, address)
 		VALUES( #{user_name}, #{id}, #{user_pwd}, #{nickname}, #{contact}, #{email}, #{birth_date}, #{gender}, #{address})
@@ -32,7 +32,7 @@
 	</insert>
 
 	<!-- 로그인 -->
-	<select id="login" resultType="com.one.vo.MemberVO">
+	<select id="login" resultType="com.swu.vo.MemberVO">
 	<![CDATA[
 		SELECT id, user_pwd
 		FROM
@@ -50,7 +50,7 @@
 	</select> -->
 
 
-	<update id="updateMember" parameterType="com.one.vo.MemberVO">
+	<update id="updateMember" parameterType="com.swu.vo.MemberVO">
      <![CDATA[
 	     update member_tbl
 	     set user_pwd=#{user_pwd}, user_name=#{user_name}, email=#{email}
