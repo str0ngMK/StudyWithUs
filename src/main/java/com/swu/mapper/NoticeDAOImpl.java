@@ -20,26 +20,26 @@ public class NoticeDAOImpl implements NoticeDAO{
 	@Override
 	public List<NoticeVO> nlist() throws Exception {
 		
-		return sql.selectList(namespace + ".nlist");
+		return sql.selectList(namespace + ".list");
 	}
 
 	@Override
 	public void nwrite(NoticeVO vo) throws Exception {
 		
-		sql.insert(namespace + ".nwrite", vo);
+		sql.insert(namespace + ".write", vo);
 		
 	}
 
 	@Override
 	public NoticeVO nview(int n_num) throws Exception {
 		
-		return sql.selectOne(namespace + ".nview", n_num);
+		return sql.selectOne(namespace + ".view", n_num);
 	}
 
 	@Override
 	public void nmodify(NoticeVO vo) throws Exception {
 		
-		sql.update(namespace + ".nmodify", vo);
+		sql.update(namespace + ".modify", vo);
 	}
 
 	@Override
@@ -64,4 +64,31 @@ public class NoticeDAOImpl implements NoticeDAO{
 	  
 	 return sql.selectList(namespace + ".listPage", data);
 	}
+	
+	// 게시물 목록 + 페이징 + 검색
+	 @Override
+	 public List<NoticeVO> listPageSearch(@Param("displayPost")int displayPost, @Param("postNum")int postNum, @Param("searchType")String searchType, @Param("keyword")String keyword) throws Exception {
+
+	  HashMap<String, Object> data = new HashMap<String, Object>();
+	  
+	  data.put("displayPost", displayPost);
+	  data.put("postNum", postNum);
+	  
+	  data.put("searchType", searchType);
+	  data.put("keyword", keyword);
+	  
+	  return sql.selectList(namespace + ".listPageSearch", data);
+	 }
+	 
+	// 게시물 총 갯수 + 검색 적용
+	 @Override
+	 public int searchCount(@Param("searchType")String searchType, @Param("keyword")String keyword) throws Exception {
+	  
+	  HashMap<String, Object> data = new HashMap<String, Object>();
+	  
+	  data.put("searchType", searchType);
+	  data.put("keyword", keyword);
+	  
+	  return sql.selectOne(namespace + ".searchCount", data); 
+	 }
 }

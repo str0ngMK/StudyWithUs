@@ -56,5 +56,17 @@ public class NoticeServieImpl implements NoticeService{
 	public List<NoticeVO> listPage(@Param("displayPost")int displayPost, @Param("postNum")int postNum) throws Exception {
 	 return dao.listPage(displayPost, postNum);
 	}
+	
+	// 게시물 목록 + 페이징 + 검색
+	@Override
+	public List<NoticeVO> listPageSearch(@Param("displayPost")int displayPost, @Param("postNum")int postNum, @Param("searchType")String searchType, @Param("keyword")String keyword) throws Exception {
+		return  dao.listPageSearch(displayPost, postNum, searchType, keyword);
+	}
+	
+	// 게시물 총 갯수
+	@Override
+	public int searchCount(@Param("searchType")String searchType, @Param("keyword")String keyword) throws Exception {
+	 return dao.searchCount(searchType, keyword);
+	}
 
 }

@@ -2,14 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ page import="java.util.*" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="resources/css/index_style.css">
     <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <link href="resources/css/indexstyle.css?ver=1" rel="stylesheet" t>
     <title>Sweeter</title>
 </head>
 <body>
@@ -23,7 +25,7 @@
         <ul class="navbar_menu">
             <li><a href="#">마이페이지</a></li>
             <li><a href="/room">스터디참여</a></li>
-            <li><a href="/notice/noticepage">공지사항</a></li>
+            <li><a href="/notice/noticelistpage?num=1">공지사항</a></li>
             <li><a href="#">이용방법</a></li>
             <li><a href="#">자유게시판</a></li>
             <li><a href="#">1:1문의</a></li>
