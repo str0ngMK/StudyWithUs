@@ -17,12 +17,12 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 @Component
 public class SocketHandler extends TextWebSocketHandler {
 	
-	//HashMap<String, WebSocketSession> sessionMap = new HashMap<>(); //À¥¼ÒÄÏ ¼¼¼ÇÀ» ´ã¾ÆµÑ ¸Ê
-	List<HashMap<String, Object>> rls = new ArrayList<>(); //À¥¼ÒÄÏ ¼¼¼ÇÀ» ´ã¾ÆµÑ ¸®½ºÆ® ---roomListSessions
+	//HashMap<String, WebSocketSession> sessionMap = new HashMap<>(); //ì›¹ì†Œì¼“ ì„¸ì…˜ì„ ë‹´ì•„ë‘˜ ë§µ
+	List<HashMap<String, Object>> rls = new ArrayList<>(); //ì›¹ì†Œì¼“ ì„¸ì…˜ì„ ë‹´ì•„ë‘˜ ë¦¬ìŠ¤íŠ¸ ---roomListSessions
 	
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage message) {
-		//¸Ş½ÃÁö ¹ß¼Û
+		//ë©”ì‹œì§€ ë°œì†¡
 		String msg = message.getPayload();
 		JSONObject obj = jsonToObjectParser(msg);
 		
@@ -30,16 +30,16 @@ public class SocketHandler extends TextWebSocketHandler {
 		HashMap<String, Object> temp = new HashMap<String, Object>();
 		if(rls.size() > 0) {
 			for(int i=0; i<rls.size(); i++) {
-				String roomNumber = (String) rls.get(i).get("roomNumber"); //¼¼¼Ç¸®½ºÆ®ÀÇ ÀúÀåµÈ ¹æ¹øÈ£¸¦ °¡Á®¿Í¼­
-				if(roomNumber.equals(rN)) { //°°Àº°ªÀÇ ¹æÀÌ Á¸ÀçÇÑ´Ù¸é
-					temp = rls.get(i); //ÇØ´ç ¹æ¹øÈ£ÀÇ ¼¼¼Ç¸®½ºÆ®ÀÇ Á¸ÀçÇÏ´Â ¸ğµç object°ªÀ» °¡Á®¿Â´Ù.
+				String roomNumber = (String) rls.get(i).get("roomNumber"); //ì„¸ì…˜ë¦¬ìŠ¤íŠ¸ì˜ ì €ì¥ëœ ë°©ë²ˆí˜¸ë¥¼ ê°€ì ¸ì™€ì„œ
+				if(roomNumber.equals(rN)) { //ê°™ì€ê°’ì˜ ë°©ì´ ì¡´ì¬í•œë‹¤ë©´
+					temp = rls.get(i); //í•´ë‹¹ ë°©ë²ˆí˜¸ì˜ ì„¸ì…˜ë¦¬ìŠ¤íŠ¸ì˜ ì¡´ì¬í•˜ëŠ” ëª¨ë“  objectê°’ì„ ê°€ì ¸ì˜¨ë‹¤.
 					break;
 				}
 			}
 			
-			//ÇØ´ç ¹æÀÇ ¼¼¼Çµé¸¸ Ã£¾Æ¼­ ¸Ş½ÃÁö¸¦ ¹ß¼ÛÇØÁØ´Ù.
+			//í•´ë‹¹ ë°©ì˜ ì„¸ì…˜ë“¤ë§Œ ì°¾ì•„ì„œ ë©”ì‹œì§€ë¥¼ ë°œì†¡í•´ì¤€ë‹¤.
 			for(String k : temp.keySet()) { 
-				if(k.equals("roomNumber")) { //´Ù¸¸ ¹æ¹øÈ£ÀÏ °æ¿ì¿¡´Â °Ç³Ê¶Ú´Ù.
+				if(k.equals("roomNumber")) { //ë‹¤ë§Œ ë°©ë²ˆí˜¸ì¼ ê²½ìš°ì—ëŠ” ê±´ë„ˆë›´ë‹¤.
 					continue;
 				}
 				
@@ -58,13 +58,13 @@ public class SocketHandler extends TextWebSocketHandler {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		//¼ÒÄÏ ¿¬°á
+		//ì†Œì¼“ ì—°ê²°
 		super.afterConnectionEstablished(session);
 		boolean flag = false;
 		String url = session.getUri().toString();
 		System.out.println(url);
 		String roomNumber = url.split("/chating/")[1];
-		int idx = rls.size(); //¹æÀÇ »çÀÌÁî¸¦ Á¶»çÇÑ´Ù.
+		int idx = rls.size(); //ë°©ì˜ ì‚¬ì´ì¦ˆë¥¼ ì¡°ì‚¬í•œë‹¤.
 		if(rls.size() > 0) {
 			for(int i=0; i<rls.size(); i++) {
 				String rN = (String) rls.get(i).get("roomNumber");
@@ -76,17 +76,17 @@ public class SocketHandler extends TextWebSocketHandler {
 			}
 		}
 		
-		if(flag) { //Á¸ÀçÇÏ´Â ¹æÀÌ¶ó¸é ¼¼¼Ç¸¸ Ãß°¡ÇÑ´Ù.
+		if(flag) { //ì¡´ì¬í•˜ëŠ” ë°©ì´ë¼ë©´ ì„¸ì…˜ë§Œ ì¶”ê°€í•œë‹¤.
 			HashMap<String, Object> map = rls.get(idx);
 			map.put(session.getId(), session);
-		}else { //ÃÖÃÊ »ı¼ºÇÏ´Â ¹æÀÌ¶ó¸é ¹æ¹øÈ£¿Í ¼¼¼ÇÀ» Ãß°¡ÇÑ´Ù.
+		}else { //ìµœì´ˆ ìƒì„±í•˜ëŠ” ë°©ì´ë¼ë©´ ë°©ë²ˆí˜¸ì™€ ì„¸ì…˜ì„ ì¶”ê°€í•œë‹¤.
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("roomNumber", roomNumber);
 			map.put(session.getId(), session);
 			rls.add(map);
 		}
 		
-		//¼¼¼Çµî·ÏÀÌ ³¡³ª¸é ¹ß±Ş¹ŞÀº ¼¼¼ÇID°ªÀÇ ¸Ş½ÃÁö¸¦ ¹ß¼ÛÇÑ´Ù.
+		//ì„¸ì…˜ë“±ë¡ì´ ëë‚˜ë©´ ë°œê¸‰ë°›ì€ ì„¸ì…˜IDê°’ì˜ ë©”ì‹œì§€ë¥¼ ë°œì†¡í•œë‹¤.
 		JSONObject obj = new JSONObject();
 		obj.put("type", "getId");
 		obj.put("sessionId", session.getId());
@@ -95,8 +95,8 @@ public class SocketHandler extends TextWebSocketHandler {
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		//¼ÒÄÏ Á¾·á
-		if(rls.size() > 0) { //¼ÒÄÏÀÌ Á¾·áµÇ¸é ÇØ´ç ¼¼¼Ç°ªµéÀ» Ã£¾Æ¼­ Áö¿î´Ù.
+		//ì†Œì¼“ ì¢…ë£Œ
+		if(rls.size() > 0) { //ì†Œì¼“ì´ ì¢…ë£Œë˜ë©´ í•´ë‹¹ ì„¸ì…˜ê°’ë“¤ì„ ì°¾ì•„ì„œ ì§€ìš´ë‹¤.
 			for(int i=0; i<rls.size(); i++) {
 				rls.get(i).remove(session.getId());
 			}

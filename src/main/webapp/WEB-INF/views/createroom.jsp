@@ -89,7 +89,7 @@
 	</tr>
 	<tr>
 		<td class="tleft"></td>
-		<td class="tright"><input type="password" name="pwd"></td>
+		<td class="tright"><input type="text" name="pwd"></td>
 	</tr>
 	<tr  hidden="true">
 		<td class="tleft"  hidden="true">이미지 첨부</td>

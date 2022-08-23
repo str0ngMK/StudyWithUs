@@ -13,6 +13,8 @@ public interface ChatService {
 
 	public List<TRoom> selectRoomList(HashMap<Object, Object> params);
 
-	public int UpdateRoomInfo(TRoom tRoom);
+	public int updateRoomInfo(TRoom room);
+	
+	public HashMap<String, Object> roomPassword(HashMap<String, Object> params);
 
 }
