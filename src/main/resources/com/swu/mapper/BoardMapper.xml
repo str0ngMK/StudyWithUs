@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.swu.mapper.BoardMapper">
+ 	
+ 	<!-- 게시물 등록 -->
+    <insert id="enroll">
+        insert into swu_board(title, content, writer)
+        values (#{title}, #{content}, #{writer})
+    </insert>
+ 	
+ 	<!-- 게시판 목록 읽어오기 -->
+    <select id="getList" resultType="com.swu.vo.BoardVO">
+        select * from swu_board
+    </select>
+ 	
+ 	<!-- 게시물 상세화면 -->
+    <select id="getPage" resultType="com.swu.vo.BoardVO">
+        select * from swu_board where bno = #{bno}
+    </select>
+ 	
+ 	<!-- 게시물 수정하기 -->
+    <update id="modify">
+        update swu_board set title = #{title}, content = #{content}, updatedate = now() where bno = #{bno}
+    </update>
+    
+    <!-- 게시물 삭제하기 -->
+    <delete id="delete">
+        delete from swu_board where bno = #{bno}
+    </delete>
+    
+    <!-- 게시물 목록(페이징) -->
+    <select id="getListPaging" resultType="com.swu.vo.BoardVO">
+        select * from (
+                select bno, title, writer, regdate, viewnum  
+                from swu_board 
+                <if test="keyword != null">
+                    <include refid="criteria"></include>
+                </if>
+                order by bno desc) as T1
+        limit #{skip},#{amount}
+    </select>
+    
+    <!-- 게시물 총 개숫 -->
+    <select id="getTotal" resultType="int">
+        select count(*) from swu_board
+        <if test="keyword != null">
+            <include refid="criteria"></include>
+        </if>
+    </select>
+    
+    <!-- 검색 조건문 -->
+    <sql id="criteria">
+        <trim prefix="where (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                        <when test="type == 'T'.toString()">
+                            title like concat('%',#{keyword},'%') 
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            content like concat('%',#{keyword},'%') 
+                        </when>
+                        <when test="type == 'W'.toString()">
+                            writer like concat('%',#{keyword},'%' )
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </sql>
+    
+    <!-- 조회수 +1 -->
+    <update id="updateViewCnt" parameterType="int">
+    	UPDATE swu_board
+    	set viewnum = viewnum + 1
+    	where bno = #{bno}
+    </update>
+    
+
+	
+	
+  </mapper>
