@@ -125,6 +125,7 @@
 			$("#yourName").hide();
 			$("#yourMsg").show();
 		}
+// 		tid=setInterval('msg_time()',1000);
 	}
 
 	function send() {
@@ -146,7 +147,42 @@
 		window.location.href = "/deleteRoom.do?no=" + rNumber;	
 	}
 	
+	
+	// 공부 시작 이벤트
+	function start_timer(){
+		tid=setInterval('msg_time()',1000);
+	}
+	
 	// 공부 타이머 이벤트
+	var SetTime = 0;      // 최초 설정 시간(기본 : 초)
+	var m;
+    function msg_time() {   // 1초씩 카운트      
+    	$("#start").hide();
+        m = Math.floor(SetTime / 60) + "분" + (SetTime % 60) + "초"; // 남은 시간 계산         
+        var msg = "현재 공부 시간 <font color='red'>" + m + "</font> ing....";  
+        var btn = "<button id='stop' onclick='stop_timer()'>공부 종료</button>";
+        document.all.ViewTimer.innerHTML = msg;     // div 영역에 보여줌
+        document.all.ViewButton.innerHTML = btn;
+        
+        SetTime++;                  // 1초씩 증가
+    }
+    
+    // 공부 종료 버튼 이벤트
+	function stop_timer(){
+		var btn = "<button id='stop' onclick='stop_timer()'>공부 종료</button>";
+		var roomNumber = $("#roomNumber").val();
+		if (confirm("종료 하시겠습니까?") == true){    //확인
+			clearInterval(tid);
+			document.all.ViewTimer.innerHTML = btn;
+			$("#stop").hide();
+			SetTime--;
+			// 컨트롤러 이동
+			window.location.href="/submitTimer.do?rname=" + "${roomName}" + "&" + "rno=" + roomNumber + "&" + "time=" + SetTime;
+		}else{   //취소
+			setInterval(tid, 1000);
+		  	return false;
+		}
+	}
 	
 </script>
 <body>
@@ -154,10 +190,15 @@
 		<h1>${roomName}의 채팅방</h1>
 		<button onclick="delete_btn()">방 삭제</button>
 <!-- 		<button id= "timer" onclick="timer_btn()">타이머 시작</button> -->
-		<span class="timer js-timer">00:00:00</span>
-		<input class="js-timer_startBtn" type="button" value="시작" />
-		<input class="js-timer_stopBtn" type="button" value="정지" />
-			
+		<div class="container">
+   			<h2>
+        		<div id="ViewTimer" name="ViewTimer">
+        		</div>
+        		<div id="ViewButton" name="ViewButton">
+        		</div>
+    		</h2>
+    		<button id="start" onclick="start_timer()">공부 시작</button>
+		</div>
 		<input type="hidden" id="sessionId" value="">
 		<input type="hidden" id="roomNumber" value="${roomNumber}">
 		

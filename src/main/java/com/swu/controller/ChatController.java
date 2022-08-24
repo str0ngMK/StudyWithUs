@@ -34,7 +34,7 @@ public class ChatController {
 	}
 
 	/**
-	 * 방 페이지
+	 * 諛� �럹�씠吏�
 	 * @return
 	 */
 	@RequestMapping("/room.do")
@@ -45,7 +45,7 @@ public class ChatController {
 	}
 	
 	/**
-	 * 방 생성하기
+	 * 諛� �깮�꽦�븯湲�
 	 * @param params
 	 * @return
 	 */
@@ -82,10 +82,10 @@ public class ChatController {
 				room.setPassword(pwd);
 			}
 			
-			// 방정보 DB저장
+			// 諛⑹젙蹂� DB���옣
 			result = chatService.insertRoomInfo(room);
 			
-			// 방 안만들어짐 
+			// 諛� �븞留뚮뱾�뼱吏� 
 			if(result < 1) {
 				message = Constants.ERROR_MSG;
 			} else {
@@ -101,7 +101,7 @@ public class ChatController {
 
 
 	/**
-	 * 방 생성하기
+	 * 諛� �깮�꽦�븯湲�
 	 * @param params
 	 * @return
 	 */
@@ -115,12 +115,12 @@ public class ChatController {
 //			TRoom TRoom = new TRoom();
 //			TRoom.setRname(roomName);
 //			
-//			// 방정보 DB저장
+//			// 諛⑹젙蹂� DB���옣
 //			result = chatService.insertRoomInfo(TRoom);
 //			
-//			// 방 안만들어짐 
+//			// 諛� �븞留뚮뱾�뼱吏� 
 //			if(result < 1) {
-//				System.err.println("방안만들어짐");	
+//				System.err.println("諛⑹븞留뚮뱾�뼱吏�");	
 //			} else {
 //				roomList.add(TRoom);
 //			}
@@ -130,7 +130,7 @@ public class ChatController {
 //	}
 
 	/**
-	 * 방 정보가져오기
+	 * 諛� �젙蹂닿��졇�삤湲�
 	 * @param params
 	 * @return
 	 */
@@ -143,7 +143,7 @@ public class ChatController {
 	}
 
 	/**
-	 * 채팅방 이동 전 체크
+	 * 梨꾪똿諛� �씠�룞 �쟾 泥댄겕
 	 * @returnw
 	 */
 //	@RequestMapping("/moveChating.do")
@@ -158,7 +158,7 @@ public class ChatController {
 //		
 //		if (new_list != null && new_list.size() > 0) {
 //			
-//			// 방 체크
+//			// 諛� 泥댄겕
 //			roomData = chatService.roomPassword(params);
 //			
 //			if(roomData.get("PASSWORD") != null && !"".equals(roomData.get("PASSWORD"))){
@@ -176,7 +176,7 @@ public class ChatController {
 //	}
 	
 	/**
-	 * 채팅방으로 페이지 이동
+	 * 梨꾪똿諛⑹쑝濡� �럹�씠吏� �씠�룞
 	 * @return
 	 */
 //	@RequestMapping("/moveChat.do")
@@ -192,16 +192,17 @@ public class ChatController {
 //	}
 	
 	/**
-	 * 채팅방
+	 * 梨꾪똿諛�
 	 * @return
 	 */
 	@RequestMapping("/moveChat.do")
 	public ModelAndView chating(@RequestParam HashMap<Object, Object> params) {
+		System.out.println(params.toString());
 		ModelAndView mv = new ModelAndView();
 		int roomNumber = Integer.parseInt((String) params.get("roomNumber"));
-
 		List<TRoom> new_list = roomList.stream().filter(o -> o.getRno() == roomNumber)
 				.collect(Collectors.toList());
+		
 		if (new_list != null && new_list.size() > 0) {
 			mv.addObject("roomName", params.get("roomName"));
 			mv.addObject("roomNumber", params.get("roomNumber"));
@@ -214,7 +215,7 @@ public class ChatController {
 	
 	
 	/**
-	 * 채팅방 삭제하기
+	 * 梨꾪똿諛� �궘�젣�븯湲�
 	 * @return
 	 * **/
 	@RequestMapping("/deleteRoom.do")
@@ -228,20 +229,20 @@ public class ChatController {
 	
 		
 		if(no == null && "".equals(no)) {
-			message = "시스템오류";
+			message = "�떆�뒪�뀥�삤瑜�";
 		} else {
 
 			TRoom = new TRoom();
 			TRoom.setRno(Integer.parseInt(no));
 
-			// 방정보 DB저장
+			// 諛⑹젙蹂� DB���옣
 			result = chatService.updateRoomInfo(TRoom);
 
-			// 방 삭제 실패
+			// 諛� �궘�젣 �떎�뙣
 			if(result < 1) {
-				message = "시스템오류";
+				message = "�떆�뒪�뀥�삤瑜�";
 			} else {
-				message = "삭제가 완료되었습니다.";
+				message = "�궘�젣媛� �셿猷뚮릺�뿀�뒿�땲�떎.";
 			}
 		}
 		
@@ -251,7 +252,7 @@ public class ChatController {
 	}
 	
 	/**
-	 * 채팅방 생성하기 페이지 이동
+	 * 梨꾪똿諛� �깮�꽦�븯湲� �럹�씠吏� �씠�룞
 	 * @return
 	 */
 	@RequestMapping("/createRoomPage.do")
@@ -260,7 +261,7 @@ public class ChatController {
 	}
 	
 	/**
-	 * 고객센터 페이지 이동
+	 * 怨좉컼�꽱�꽣 �럹�씠吏� �씠�룞
 	 * @return
 	 */
 	@RequestMapping("/serviceCenter.do")
@@ -269,7 +270,7 @@ public class ChatController {
 	}
 	
 	/**
-	 * 패스워드 페이지 이동
+	 * �뙣�뒪�썙�뱶 �럹�씠吏� �씠�룞
 	 * @return
 	 */
 	@RequestMapping("/inputPwd.do")
@@ -277,5 +278,18 @@ public class ChatController {
 		return "inputPwd";
 	}
 	
+	
+	@RequestMapping("/submitTimer.do")
+	public ModelAndView submitTimer(@RequestParam String rname, String rno, String time) {
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		
+		map.put("roomName", rname);
+		map.put("roomNumber", rno);
+		System.out.println("방이름 = " + rname + ", 방번호 = " + rno + ", 시간= " + time );
+		
+		ModelAndView mv = chating(map);
+		
+		return mv;
+	}
 	
 }
