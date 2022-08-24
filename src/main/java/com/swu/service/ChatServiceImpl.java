@@ -31,8 +31,13 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public int UpdateRoomInfo(TRoom room) {
+	public int updateRoomInfo(TRoom room) {
 		return mapper.updateRoomInfo(room);
+	}
+
+	@Override
+	public HashMap<String, Object> roomPassword(HashMap<String, Object> params) {
+		return mapper.roomPassword(params);
 	}
 
 }

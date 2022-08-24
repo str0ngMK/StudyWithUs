@@ -54,7 +54,7 @@ public class ChatController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/message");
 		
-		TRoom tRoom = new TRoom();
+		TRoom room = new TRoom();
 		
 		String roomName = "";
 		String category = "";
@@ -74,23 +74,23 @@ public class ChatController {
 			pwdYn = params.get("pwdYn").toString();
 			pwd = params.get("pwd").toString();
 			
-			tRoom.setRname(roomName);
-			tRoom.setCategory(category);
-			tRoom.setMaxUser(Integer.parseInt(userCount));
+			room.setRname(roomName);
+			room.setCategory(category);
+			room.setMaxUser(Integer.parseInt(userCount));
 			
 			if(pwdYn.equals("1")) {
-				tRoom.setPassword(pwd);
+				room.setPassword(pwd);
 			}
 			
 			// 방정보 DB저장
-			result = chatService.insertRoomInfo(tRoom);
+			result = chatService.insertRoomInfo(room);
 			
 			// 방 안만들어짐 
 			if(result < 1) {
 				message = Constants.ERROR_MSG;
 			} else {
 				message = Constants.CREATE_ROOM_SUCCESS;
-				roomList.add(tRoom);
+				roomList.add(room);
 			}
 		}
 		
@@ -143,10 +143,59 @@ public class ChatController {
 	}
 
 	/**
+	 * 채팅방 이동 전 체크
+	 * @returnw
+	 */
+//	@RequestMapping("/moveChating.do")
+//	@ResponseBody
+//	public HashMap<String , Object> chating(@RequestParam HashMap<String, Object> params, TRoom room) {
+//		HashMap<String , Object> map = new HashMap<String, Object>();
+//		HashMap<String, Object> roomData = new HashMap<String, Object>();
+//		
+//		int roomNumber = Integer.parseInt((String) params.get("roomNumber"));
+//		List<TRoom> new_list = roomList.stream().filter(o -> o.getRno() == roomNumber).collect(Collectors.toList());
+//		
+//		
+//		if (new_list != null && new_list.size() > 0) {
+//			
+//			// 방 체크
+//			roomData = chatService.roomPassword(params);
+//			
+//			if(roomData.get("PASSWORD") != null && !"".equals(roomData.get("PASSWORD"))){
+//				map.put("pwdYn", "1");
+//			} else {
+//				map.put("pwdYn", "0");
+//				map.put("roomData", params);
+//				map.put("view", "chat");
+//			}
+//			
+//		} else {
+//			map.put("view", "room");
+//		}
+//		return map;
+//	}
+	
+	/**
+	 * 채팅방으로 페이지 이동
+	 * @return
+	 */
+//	@RequestMapping("/moveChat.do")
+//	public ModelAndView moveChat(@RequestParam HashMap<Object, Object> params) {
+//		ModelAndView mv = new ModelAndView();
+//		
+//		mv.addObject("roomName", params.get("roomName"));
+//		mv.addObject("roomNumber", params.get("roomNumber"));
+//		
+//		mv.setViewName("chat");
+//		
+//		return mv;
+//	}
+	
+	/**
 	 * 채팅방
 	 * @return
 	 */
-	@RequestMapping("/moveChating.do")
+	@RequestMapping("/moveChat.do")
 	public ModelAndView chating(@RequestParam HashMap<Object, Object> params) {
 		ModelAndView mv = new ModelAndView();
 		int roomNumber = Integer.parseInt((String) params.get("roomNumber"));
@@ -162,6 +211,7 @@ public class ChatController {
 		}
 		return mv;
 	}
+	
 	
 	/**
 	 * 채팅방 삭제하기
@@ -185,7 +235,7 @@ public class ChatController {
 			TRoom.setRno(Integer.parseInt(no));
 
 			// 방정보 DB저장
-			result = chatService.UpdateRoomInfo(TRoom);
+			result = chatService.updateRoomInfo(TRoom);
 
 			// 방 삭제 실패
 			if(result < 1) {
@@ -217,5 +267,15 @@ public class ChatController {
 	public String serviceCenter() {
 		return "serviceCenter";
 	}
+	
+	/**
+	 * 패스워드 페이지 이동
+	 * @return
+	 */
+	@RequestMapping("/inputPwd.do")
+	public String moveinputPwd() {
+		return "inputPwd";
+	}
+	
 	
 }

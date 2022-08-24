@@ -47,4 +47,12 @@
 		 WHERE RNO = #{rno}
 	</update>
 	
+	<select id="roomPassword" resultType="hashMap" parameterType="hashMap">
+		SELECT A.RNO,
+		       A.PASSWORD
+		  FROM TROOM A
+		 WHERE RNO = #{roomNumber}
+		   AND A.DEL_YN = '0'
+	</select>
+	
 </mapper>

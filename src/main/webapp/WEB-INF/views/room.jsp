@@ -95,19 +95,29 @@
 	
 	function createRoomPage(){
 		location.href = "/createRoomPage.do";
-/* 		$("#createRoom").click(function(){
-			var msg = {	roomName : $('#roomName').val()	};
-
-			commonAjax('/createRoom', msg, 'post', function(result){
-				createChatingRoom(result);
-			});
-
-			$("#roomName").val("");
-		}); */
 	}
 
 	function goRoom(number, name){
-		location.href="/moveChating.do?roomName="+name+"&"+"roomNumber="+number;
+		
+		window.open("/moveChat.do?roomName="+name+"&"+"roomNumber="+number, 'go', 'width=560, height=700')
+// 		var data = {'roomName': name, 'roomNumber': number}
+			
+// 		$.ajax({
+// 			url: '/moveChating.do',
+// 			data: data,
+// 			type: 'post',
+// 			success: function (res) {
+// 				if(res.pwdYn == "1"){
+// 					window.location.href='/inputPwd.do';
+// 				} else {
+// 					window.location.href="/moveChat.do?roomName="+res.roomData.roomName+"&"+"roomNumber="+res.roomData.roomNumber;
+// 				}
+// 			},
+// 			error : function(err){
+// 				console.log('error');
+// 				calbak(err);
+// 			}
+// 		});
 	}
 
 // 	function createChatingRoom(res){
