@@ -35,9 +35,20 @@ public class ChatServiceImpl implements ChatService {
 		return mapper.updateRoomInfo(room);
 	}
 
+
 	@Override
-	public HashMap<String, Object> roomPassword(HashMap<String, Object> params) {
+	public HashMap<String, Object> selectRoomPassword(HashMap<String , Object> params) {
 		return mapper.roomPassword(params);
+	}
+
+	@Override
+	public int selectPwdCheck(HashMap<String, Object> params) {
+		return mapper.selectPwdCheck(params);
+	}
+
+	@Override
+	public String selectRowner(HashMap<String, Object> params) {
+		return mapper.selectRowner(params);
 	}
 
 }

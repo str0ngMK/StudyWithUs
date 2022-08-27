@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.swu.mapper.TimeMapper">
+
+	<select id="selectStudyTime" resultType="hashMap" parameterType="com.swu.vo.TStudy">
+		SELECT A.mem_num,
+			   A.study_time 
+		  FROM study_tbl A
+		 WHERE A.mem_num = #{memNum}
+	</select>
+	
+	<update id="updateStudyTime" parameterType="com.swu.vo.TStudy">
+		UPDATE study_tbl A
+		   SET A.study_time = (SELECT study_time FROM (SELECT B.study_time 
+ 		  FROM study_tbl B
+ 		 WHERE B.mem_num = #{memNum}) TEMP) + #{nowStudyTime}
+		 WHERE A.mem_num = #{memNum}
+	</update> 
+	
+	<insert id="insertStudyTime" parameterType="com.swu.vo.TStudy">
+		INSERT INTO study_tbl  
+				   (mem_num,
+					study_time 
+					) 
+			VALUES (#{memNum}, 
+					#{nowStudyTime}
+					) 
+	</insert> 
+</mapper>

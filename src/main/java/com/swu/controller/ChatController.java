@@ -3,9 +3,9 @@ package com.swu.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.swu.common.Constants;
 import com.swu.service.ChatService;
+import com.swu.vo.MemberVO;
 import com.swu.vo.TRoom;
 
 @Controller
@@ -32,9 +33,8 @@ public class ChatController {
 		mv.setViewName("chat");
 		return mv;
 	}
-
 	/**
-	 * 諛� �럹�씠吏�
+	 * 방 페이지
 	 * @return
 	 */
 	@RequestMapping("/room.do")
@@ -45,14 +45,16 @@ public class ChatController {
 	}
 	
 	/**
-	 * 諛� �깮�꽦�븯湲�
+	 * 방 생성하기
 	 * @param params
 	 * @return
 	 */
 	@RequestMapping("/createRoom.do")
-	public ModelAndView createRoom1(@RequestParam HashMap<Object, Object> params) {
+	public ModelAndView createRoom1(HttpSession session, @RequestParam HashMap<Object, Object> params) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/message");
+		
+		MemberVO memberSession = (MemberVO) session.getAttribute("member");
 		
 		TRoom room = new TRoom();
 		
@@ -75,6 +77,7 @@ public class ChatController {
 			pwd = params.get("pwd").toString();
 			
 			room.setRname(roomName);
+			room.setRowner(memberSession.getId());
 			room.setCategory(category);
 			room.setMaxUser(Integer.parseInt(userCount));
 			
@@ -82,10 +85,8 @@ public class ChatController {
 				room.setPassword(pwd);
 			}
 			
-			// 諛⑹젙蹂� DB���옣
 			result = chatService.insertRoomInfo(room);
 			
-			// 諛� �븞留뚮뱾�뼱吏� 
 			if(result < 1) {
 				message = Constants.ERROR_MSG;
 			} else {
@@ -98,124 +99,99 @@ public class ChatController {
 		
 		return mv;
 	}
-
-
+	
 	/**
-	 * 諛� �깮�꽦�븯湲�
-	 * @param params
-	 * @return
-	 */
-//	@RequestMapping("/createRoom")
-//	public @ResponseBody List<TRoom> createRoom(@RequestParam HashMap<Object, Object> params) {
-//		String roomName = (String) params.get("roomName");
-//		String category = (String) params.get("category");
-//		int result = 0;
-//		
-//		if (roomName != null && !roomName.trim().equals("") && category != null) {
-//			TRoom TRoom = new TRoom();
-//			TRoom.setRname(roomName);
-//			
-//			// 諛⑹젙蹂� DB���옣
-//			result = chatService.insertRoomInfo(TRoom);
-//			
-//			// 諛� �븞留뚮뱾�뼱吏� 
-//			if(result < 1) {
-//				System.err.println("諛⑹븞留뚮뱾�뼱吏�");	
-//			} else {
-//				roomList.add(TRoom);
-//			}
-//			
-//		}
-//		return roomList;
-//	}
-
-	/**
-	 * 諛� �젙蹂닿��졇�삤湲�
+	 * 방 정보가져오기
 	 * @param params
 	 * @return
 	 */
 	@RequestMapping("/getRoom.do")
 	public @ResponseBody List<TRoom> getRoom(@RequestParam HashMap<Object, Object> params) {
+		
+		// 최초 룸리스트
+		if(params.size() == 0) {
+			params.put("category", "전체");
+		}
+		
 		List<TRoom> list = chatService.selectRoomList(params);
 		roomList = list;
 		
 		return list;
 	}
-
-	/**
-	 * 梨꾪똿諛� �씠�룞 �쟾 泥댄겕
-	 * @returnw
-	 */
-//	@RequestMapping("/moveChating.do")
-//	@ResponseBody
-//	public HashMap<String , Object> chating(@RequestParam HashMap<String, Object> params, TRoom room) {
-//		HashMap<String , Object> map = new HashMap<String, Object>();
-//		HashMap<String, Object> roomData = new HashMap<String, Object>();
-//		
-//		int roomNumber = Integer.parseInt((String) params.get("roomNumber"));
-//		List<TRoom> new_list = roomList.stream().filter(o -> o.getRno() == roomNumber).collect(Collectors.toList());
-//		
-//		
-//		if (new_list != null && new_list.size() > 0) {
-//			
-//			// 諛� 泥댄겕
-//			roomData = chatService.roomPassword(params);
-//			
-//			if(roomData.get("PASSWORD") != null && !"".equals(roomData.get("PASSWORD"))){
-//				map.put("pwdYn", "1");
-//			} else {
-//				map.put("pwdYn", "0");
-//				map.put("roomData", params);
-//				map.put("view", "chat");
-//			}
-//			
-//		} else {
-//			map.put("view", "room");
-//		}
-//		return map;
-//	}
 	
 	/**
-	 * 梨꾪똿諛⑹쑝濡� �럹�씠吏� �씠�룞
-	 * @return
-	 */
-//	@RequestMapping("/moveChat.do")
-//	public ModelAndView moveChat(@RequestParam HashMap<Object, Object> params) {
-//		ModelAndView mv = new ModelAndView();
-//		
-//		mv.addObject("roomName", params.get("roomName"));
-//		mv.addObject("roomNumber", params.get("roomNumber"));
-//		
-//		mv.setViewName("chat");
-//		
-//		return mv;
-//	}
-	
-	/**
-	 * 梨꾪똿諛�
+	 * 채팅방
 	 * @return
 	 */
 	@RequestMapping("/moveChat.do")
-	public ModelAndView chating(@RequestParam HashMap<Object, Object> params) {
-		System.out.println(params.toString());
+	public ModelAndView chating(@RequestParam HashMap<String, Object> params, String gb) {
 		ModelAndView mv = new ModelAndView();
-		int roomNumber = Integer.parseInt((String) params.get("roomNumber"));
-		List<TRoom> new_list = roomList.stream().filter(o -> o.getRno() == roomNumber)
-				.collect(Collectors.toList());
+		HashMap<String , Object> roomPwdCheck = new HashMap<String, Object>();
+		HashMap<String , Object> pwdMap = new HashMap<String, Object>();
+		String rowner = "";
 		
-		if (new_list != null && new_list.size() > 0) {
-			mv.addObject("roomName", params.get("roomName"));
-			mv.addObject("roomNumber", params.get("roomNumber"));
-			mv.setViewName("chat");
-		} else {
-			mv.setViewName("TRoom");
+		// 체크용 맵
+		pwdMap.put("roomNumber", params.get("roomNumber").toString());
+		
+		// 공부시간 저장 후
+		if(params.get("rowner") != null) {
+			mv.addObject("rowner", params.get("rowner").toString());
 		}
+		
+		if(gb == null) {
+			// rowner 가져오기
+			rowner = chatService.selectRowner(pwdMap);
+			mv.addObject("rowner", rowner);
+
+			roomPwdCheck = chatService.selectRoomPassword(pwdMap);
+		
+			// if 비번이 있으면 -> 비번 입력 창 -> if 비번이 맞으면 -> 입장 / else -> 비밀번호를 잘못 입력했습니다.
+			if(roomPwdCheck.get("PASSWORD") != null) {
+				// 비번 입력 창
+				mv.addObject("roomNumber", params.get("roomNumber"));
+				mv.addObject("roomName", params.get("roomName"));
+				mv.setViewName("inputPwd");
+			} 
+			// 비번 없는 경우 바로 입장
+			else {
+				mv.addObject("roomNumber", params.get("roomNumber"));
+				mv.addObject("roomName", params.get("roomName"));
+				mv.setViewName("chat");
+			}
+		} else {
+			mv.addObject("roomNumber", params.get("roomNumber"));
+			mv.addObject("roomName", params.get("roomName"));
+			mv.setViewName("chat");
+		}
+		
 		return mv;
 	}
 	
+	/**
+	 * 채팅방 비번 입력 성공 했을 경우
+	 * @return
+	 */
+	@RequestMapping("/moveChatSuccess.do")
+	public ModelAndView chatingSuccess(@RequestParam HashMap<Object, Object> params) {
+		ModelAndView mv = new ModelAndView();
+		HashMap<String , Object> checkMap = new HashMap<String, Object>();
+		
+		// 체크용 맵
+		checkMap.put("roomNumber", params.get("roomNumber").toString());
+
+		// rowner 가져오기
+		String rowner = chatService.selectRowner(checkMap);
+		
+		mv.addObject("rowner", rowner);
+		mv.addObject("roomNumber", params.get("roomNumber"));
+		mv.addObject("roomName", params.get("roomName"));
+		mv.setViewName("chat");
+		
+		return mv;
+	}
 	
 	/**
-	 * 梨꾪똿諛� �궘�젣�븯湲�
+	 * 채팅방 삭제하기
 	 * @return
 	 * **/
 	@RequestMapping("/deleteRoom.do")
@@ -229,20 +205,18 @@ public class ChatController {
 	
 		
 		if(no == null && "".equals(no)) {
-			message = "�떆�뒪�뀥�삤瑜�";
+			message = "시스템오류";
 		} else {
 
 			TRoom = new TRoom();
 			TRoom.setRno(Integer.parseInt(no));
 
-			// 諛⑹젙蹂� DB���옣
 			result = chatService.updateRoomInfo(TRoom);
 
-			// 諛� �궘�젣 �떎�뙣
 			if(result < 1) {
-				message = "�떆�뒪�뀥�삤瑜�";
+				message = "시스템오류";
 			} else {
-				message = "�궘�젣媛� �셿猷뚮릺�뿀�뒿�땲�떎.";
+				message = "삭제가 완료되었습니다.";
 			}
 		}
 		
@@ -252,7 +226,7 @@ public class ChatController {
 	}
 	
 	/**
-	 * 梨꾪똿諛� �깮�꽦�븯湲� �럹�씠吏� �씠�룞
+	 * 채팅방 생성하기 페이지 이동
 	 * @return
 	 */
 	@RequestMapping("/createRoomPage.do")
@@ -261,7 +235,7 @@ public class ChatController {
 	}
 	
 	/**
-	 * 怨좉컼�꽱�꽣 �럹�씠吏� �씠�룞
+	 * 고객센터 페이지 이동
 	 * @return
 	 */
 	@RequestMapping("/serviceCenter.do")
@@ -269,27 +243,30 @@ public class ChatController {
 		return "serviceCenter";
 	}
 	
-	/**
-	 * �뙣�뒪�썙�뱶 �럹�씠吏� �씠�룞
-	 * @return
-	 */
 	@RequestMapping("/inputPwd.do")
 	public String moveinputPwd() {
 		return "inputPwd";
 	}
 	
-	
-	@RequestMapping("/submitTimer.do")
-	public ModelAndView submitTimer(@RequestParam String rname, String rno, String time) {
-		HashMap<Object, Object> map = new HashMap<Object, Object>();
+	// 패스워드 체크
+	@RequestMapping("/pwdCheck.do")
+	@ResponseBody
+	public HashMap<String, Object> pwdCheck(@RequestParam HashMap<String, Object> params) {
+		int result = 0;
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		
-		map.put("roomName", rname);
-		map.put("roomNumber", rno);
-		System.out.println("방이름 = " + rname + ", 방번호 = " + rno + ", 시간= " + time );
+		result = chatService.selectPwdCheck(params);
 		
-		ModelAndView mv = chating(map);
+		if(result > 0) {
+			resultMap.put("roomNumber", params.get("roomNumber"));
+			resultMap.put("roomName", params.get("roomName"));
+			resultMap.put("page", "success");
+		} else {
+			resultMap.put("page", "message");
+			resultMap.put("msg", "비밀번호가 잘못입력되었습니다");
+		}
 		
-		return mv;
+		return resultMap;
 	}
 	
 }

@@ -10,6 +10,7 @@
 			  A.RNO AS rno,        
 			  A.RNAME AS rname,       
 			  A.ROWNER AS rowner,     
+			  A.CATEGORY AS category,       
 			  A.MAX_USER AS maxUser,   
 			  A.CUR_USER AS curUser,   
 			  A.DEL_YN AS delYn,     
@@ -20,6 +21,9 @@
 		WHERE A.DEL_YN = '0'
 		<if test="roomName != null and roomName != ''">
 		  AND A.RNAME LIKE CONCAT('%', #{roomName}, '%')
+		</if>
+		<if test="category != '전체'">
+		  AND A.CATEGORY = #{category}
 		</if>
 	</select>
 	
@@ -36,20 +40,35 @@
 					#{rname},
 					#{password},
 					#{category},
-					'관리자',
+					#{rowner},
 					#{maxUser},
 					1)
 	</insert>
 	
 	<update id="updateRoomInfo" parameterType="com.swu.vo.TRoom">
-		UPDATE TROOM 
-		   SET DEL_YN = '1'
-		 WHERE RNO = #{rno}
+		UPDATE TROOM A
+		   SET A.DEL_YN = '1'
+		 WHERE A.RNO = #{rno}
 	</update>
 	
 	<select id="roomPassword" resultType="hashMap" parameterType="hashMap">
 		SELECT A.RNO,
 		       A.PASSWORD
+		  FROM TROOM A
+		 WHERE A.RNO = #{roomNumber}
+		   AND A.DEL_YN = '0'
+	</select>
+	
+	<select id="selectPwdCheck" resultType="Integer" parameterType="hashMap">
+		SELECT COUNT(A.RNO) AS RNO
+		  FROM TROOM A
+		 WHERE A.RNO = #{roomNumber}
+		   AND A.PASSWORD = #{password}
+		   AND A.DEL_YN = '0'
+	</select>
+	
+	<select id="selectRowner" resultType="String" parameterType="hashMap">
+		SELECT A.ROWNER
 		  FROM TROOM A
 		 WHERE RNO = #{roomNumber}
 		   AND A.DEL_YN = '0'
