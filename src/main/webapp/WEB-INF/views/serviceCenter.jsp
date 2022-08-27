@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/includes/navigationbar.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/includes/navigationbar.jsp" %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -172,11 +172,11 @@
 		</div>
 	</div>
 	<div class="right">
-	<form>
+	<form action="/askService.do" method="post">
 		<table class="table">
 			<tr>
 				<td><p class="Ttext">제목</p></td>
-				<td><input type="text" id="Ttitle" placeholder="제목"/></td>
+				<td><input type="text" id="Ttitle" name="title" placeholder="제목"/></td>
 			</tr>
 			<tr>
 				<td><p class="Ttext">작성자</p></td>
@@ -186,7 +186,7 @@
 				<td><p class="Ttext">내용</p></td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea placeholder="문의 내용"></textarea></td>
+				<td colspan="2"><textarea name="content" placeholder="문의 내용"></textarea></td>
 			</tr>
 			<tr>
 				<td></td>
