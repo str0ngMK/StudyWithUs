@@ -62,7 +62,6 @@ public class SocketHandler extends TextWebSocketHandler {
 		super.afterConnectionEstablished(session);
 		boolean flag = false;
 		String url = session.getUri().toString();
-		System.out.println(url);
 		String roomNumber = url.split("/chating/")[1];
 		int idx = rls.size(); //방의 사이즈를 조사한다.
 		if(rls.size() > 0) {

@@ -9,6 +9,7 @@
 		padding-left: 10px;
 	}
 	.tleft{
+		line-height: 50px;
 		display: flex;
 		flex-direction: row-reverse;
 	}
@@ -27,6 +28,18 @@
 	}
 	#sub:hover {
 		background-color: #A566FF;
+	}
+	
+	#createTable{
+		margin: 0 auto;
+	}
+	.createBox{
+		width: 300px;
+		height: 30px;
+	}
+	.createOp{
+		width: 309px;
+		height: 30px;
 	}
 }
 </style>
@@ -48,15 +61,15 @@
 
 <body>
 <form action="/createRoom.do" method="post">
-<table>
+<table id="createTable">
 	<tr>
-		<td class="tleft">방 제목</td>
-		<td class="tright"><input type="text" name="roomName" required="required"></td>
+		<td class="tleft">룸 제목</td>
+		<td class="tright"><input class="createBox" type="text" name="roomName" required="required"></td>
 	</tr>
 	<tr>
 		<td class="tleft">카테고리</td>
 		<td class="tright">
-			<select name="category">
+			<select class="createOp" name="category">
 				<option>자격증</option>
 				<option>수능</option>
 				<option>임용고시</option>
@@ -67,7 +80,7 @@
 	<tr>
 		<td class="tleft">인원수</td>
 		<td class="tright">
-			<select name="userCount">
+			<select class="createOp" name="userCount">
 				<option>2</option>
 				<option>3</option>
 				<option>4</option>
@@ -89,9 +102,9 @@
 	</tr>
 	<tr>
 		<td class="tleft"></td>
-		<td class="tright"><input type="text" name="pwd"></td>
+		<td class="tright"><input class="createBox" type="password" name="pwd"></td>
 	</tr>
-	<tr  hidden="true">
+	<tr hidden="true">
 		<td class="tleft"  hidden="true">이미지 첨부</td>
 		<td class="tright" hidden="true"><input type="file" name="roomImage"  hidden="true"></td>
 	</tr>

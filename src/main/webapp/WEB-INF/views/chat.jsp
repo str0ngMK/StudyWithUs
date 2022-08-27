@@ -52,7 +52,6 @@
 			border: 1px solid #E8D9FF;
 			border-radius: 8px 8px 8px 8px;
 			padding: 10px 10px 10px 10px;
-			margin-top: 10px;
 			margin-left: 10px;
 			margin-right: 40%;
 			margin-bottom: 10px;
@@ -65,6 +64,37 @@
 		#yourMsg{
 			display: none;
 		}
+		
+		.name{
+			margin-left: 10px;
+			margin-top: 10px;
+		}
+		
+		#timer{
+			background-color: rgba(0,0,0,0);
+			width: 40px;
+			height: 40px;
+		}
+		#timer:hover {
+			cursor:pointer;
+			transform: scale(1.5);
+  			transition: transform 1s;
+  			filter: brightness(70%);
+		}
+		#sendBtn{
+			background-color: #D1B2FF;
+			border: 1.5px solid #A566FF;
+			border-radius: 5px;
+			color: white;
+			margin-left: 10px;
+			width: 100px;
+			height: 30px;
+		}
+		#sendBtn:hover {
+			background-color: #A566FF;
+			cursor:pointer;
+		}
+}
 	</style>
 </head>
 
@@ -97,7 +127,7 @@
 					if(d.sessionId == $("#sessionId").val()){
 						$("#chating").append("<p class='me'>" + d.msg + "</p>");	
 					}else{
-						$("#chating").append("<p class='others'>" + d.userName + " :" + d.msg + "</p>");
+						$("#chating").append("<p class='name'>" + d.userName + "</p><p class='others'>" + d.msg + "</p>");
 					}	
 						// 아래로 자동 스크롤
 						document.querySelector('#chating').value += (d.msg + '\n');
@@ -125,7 +155,6 @@
 			$("#yourName").hide();
 			$("#yourMsg").show();
 		}
-// 		tid=setInterval('msg_time()',1000);
 	}
 
 	function send() {
@@ -157,7 +186,7 @@
 	var SetTime = 0;      // 최초 설정 시간(기본 : 초)
 	var m;
     function msg_time() {   // 1초씩 카운트      
-    	$("#start").hide();
+    	$("#timer").hide();
         m = Math.floor(SetTime / 60) + "분" + (SetTime % 60) + "초"; // 남은 시간 계산         
         var msg = "현재 공부 시간 <font color='red'>" + m + "</font> ing....";  
         var btn = "<button id='stop' onclick='stop_timer()'>공부 종료</button>";
@@ -174,7 +203,7 @@
 		if (confirm("종료 하시겠습니까?") == true){    //확인
 			clearInterval(tid);
 			document.all.ViewTimer.innerHTML = btn;
-			$("#stop").hide();
+			$("#timer").hide();
 			SetTime--;
 			// 컨트롤러 이동
 			window.location.href="/submitTimer.do?rname=" + "${roomName}" + "&" + "rno=" + roomNumber + "&" + "time=" + SetTime;
@@ -188,8 +217,6 @@
 <body>
 	<div id="container" class="container">
 		<h1>${roomName}의 채팅방</h1>
-		<button onclick="delete_btn()">방 삭제</button>
-<!-- 		<button id= "timer" onclick="timer_btn()">타이머 시작</button> -->
 		<div class="container">
    			<h2>
         		<div id="ViewTimer" name="ViewTimer">
@@ -197,8 +224,12 @@
         		<div id="ViewButton" name="ViewButton">
         		</div>
     		</h2>
-    		<button id="start" onclick="start_timer()">공부 시작</button>
+<!--     		<button id="start" onclick="start_timer()"><img class="timer" src="/resources/image/timer.png" onclick="start_timer()"/></button> -->
+			<img id="timer" src="/resources/image/timer.png" onclick="start_timer()"/>
 		</div>
+		<c:if test='${rowner eq sessionScope.member.id}'>
+			<button onclick="delete_btn()" id="roomDeleteBtn">방 삭제</button>
+		</c:if>
 		<input type="hidden" id="sessionId" value="">
 		<input type="hidden" id="roomNumber" value="${roomNumber}">
 		
