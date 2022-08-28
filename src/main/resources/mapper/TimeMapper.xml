@@ -28,5 +28,16 @@
 			VALUES (#{memNum}, 
 					#{nowStudyTime}
 					) 
-	</insert> 
+	</insert>
+	
+	<select id="selectRanking" resultType="hashMap" parameterType="com.swu.vo.TStudy">
+		   SELECT RANK() OVER(ORDER BY B.study_time DESC) AS '랭킹',
+		   				 A.mem_num AS '회원번호',
+		   				 A.id AS '아이디',
+		   				 B.study_time AS '공부시간'
+	 				FROM member_tbl A,
+	 				 	 study_tbl B 
+    			   WHERE A.mem_num = B.mem_num 
+ 				ORDER BY B.study_time DESC;
+	</select>
 </mapper>
