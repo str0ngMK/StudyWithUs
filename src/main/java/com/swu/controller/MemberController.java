@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.swu.service.MemberService;
@@ -60,20 +61,29 @@ public class MemberController {
 
 	// 회원가입
 	@RequestMapping(value = "/user/joinform", method = RequestMethod.POST)
-	public String postRegister(MemberVO memberVO) throws Exception {
+	public ModelAndView postRegister(MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
 		logger.info("post register");
 		int result = memberService.idChk(memberVO);
 		try {
+			mv.setViewName("message");
+
 			if(result == 1) {
-				return "/user/joinform";
+				//return "/user/joinform";
+				mv.addObject("url", "/user/joinform");
 			} else {
 				memberService.register(memberVO);
+				mv.addObject("url", "/login/loginForm");
+				mv.addObject("msg", "회원가입이 완료되었습니다.");
 			}
+			
 		} catch(Exception e) {
+			mv.addObject("url", "redirect:/index");
+			mv.addObject("msg", "회원가입에 실패했습니다 관리자에게 문의하세요");
 			throw new RuntimeException();
 		}
 
-		return "redirect:/login/loginForm";
+		return mv;
 	}
 
 	// 회원가입 Get

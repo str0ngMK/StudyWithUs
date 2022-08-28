@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <script>
 	alert('${msg}');
-	window.location.href = '/room.do'
+	window.location.href = '${url}';
 </script>

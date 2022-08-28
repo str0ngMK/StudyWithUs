@@ -96,6 +96,7 @@ public class ChatController {
 		}
 		
 		mv.addObject("msg", message);
+		mv.addObject("url", "/room.do");
 		
 		return mv;
 	}

@@ -17,7 +17,7 @@
 		color : rgb(180, 112, 203);
 	}
 	.navbar_login {
-		paosision : absolute:
+		paosision : absolute;
 		right : 10%;
 	}
 	.blogin{
@@ -109,7 +109,7 @@
         		</div>
         	</c:if>
         </div>
-  </div>
 </nav>
+</div>
 </body>
 </html>

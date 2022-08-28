@@ -1,16 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>       
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="/WEB-INF/views/includes/navigationbar.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+<title>자유게시판</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
   <style>
   a{
   	text-decoration : none;
@@ -87,10 +84,10 @@
   .search_area select{
   	height: 35px;
   }
-   
   </style>
 </head>
 <body>
+<div class="container">
 <h1>목록페이지입니다.</h1>
 <div class="table_wrap">
 	<a href="/board/enroll" class="top_btn">게시판 등록</a>
@@ -157,9 +154,6 @@
 			</ul>
 		</div>
 	</div>
-	
-
-	
 	<form id="moveForm" method="get">	
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
@@ -167,7 +161,9 @@
 		<input type="hidden" name="type" value="${pageMaker.cri.type }">	
 	</form>
 </div>
-
+</div>
+<%@ include file="/WEB-INF/views/includes/footer.jsp" %>
+</body>
 <script>
 $(document).ready(function(){
 	
@@ -239,6 +235,4 @@ $(document).ready(function(){
 	});
 	
 </script>
-
-</body>
 </html>
