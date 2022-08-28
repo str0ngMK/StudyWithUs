@@ -2,21 +2,38 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 
-	var password = window.prompt('비밀번호를 입력하세요');
+	window.onload = function(){
+		pwdCheck();
+	}
 	
-	function pwdCheck2(){	
-		$.ajax({
-			url: '/moveChating.do',
-			data: data,
-			type: 'post',
-			success: function () {
-				console.log($("#roomData"));
-			},
-			error : function(err){
-				console.log('error');
-				calbak(err);
-			}
-		});
+	function pwdCheck(){	
+	    var password = window.prompt('비밀번호를 입력하세요');
+	    
+		if(password != null){
+			var data = {
+					    'roomNumber' : ${roomNumber},
+					    'roomName'   : '${roomName}', 
+					    'password'   : password
+			           }
+			
+			$.ajax({
+				url: '/pwdCheck.do',
+				data: data,
+				type: 'post',
+				success: function (res) {
+					if(res.page == 'success'){
+		 				window.location.href="/moveChatSuccess.do?roomName=" + res.roomName + "&" + "roomNumber=" + res.roomNumber;
+					} else {
+						alert('비밀번호가 잘못입력되었습니다.');
+						window.location.href="/moveChat.do?roomName=" + '${roomName}' + "&" + "roomNumber=" + ${roomNumber};
+					}
+				},
+				error : function(err){
+					console.log('error');
+					calbak(err);
+				}
+			});
+		} else window.close();
 	}
 	
 </script>

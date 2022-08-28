@@ -16,4 +16,9 @@ public interface ChatMapper {
 	public int updateRoomInfo(TRoom room);
 
 	public HashMap<String, Object> roomPassword(HashMap<String, Object> params);
+
+	public int selectPwdCheck(HashMap<String, Object> params);
+
+	public String selectRowner(HashMap<String, Object> params);
+	
 }

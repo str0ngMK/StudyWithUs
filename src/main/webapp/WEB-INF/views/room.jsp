@@ -64,19 +64,40 @@
 		#roomName{
 			width: 290px;
 		}
-		img{
-			width: 320px;
-			height: 250px;
-		}
 		.test{
+			border-radius: 10px 10px 10px 10px;
+			box-shadow: 0 -10px 50px -5px #E8D9FF inset;
 			margin-right: 30px;
 			margin-top : 10px;
 		}
-		.testname:hover{					/* 방 제목 */
-			text-decoration: underline;		/* 밑줄 */
+		.img{
+			border-radius: 10px 10px 10px 10px;
+			width: 320px;
+			height: 250px;
+		}
+		.rName{
+			font-size: 20px;
+		}
+		.rName:hover{					/* 방 제목 */
 			cursor : pointer;				/* 손구락 */
 			font-weight: bold;				/* 두껍게 */
 		}
+		.rRowner{
+			float: right;
+			flex-direction: row-reverse;
+		}
+		
+		.mainBtn{
+			margin-left: 10px;
+			background-color: #D1B2FF;
+			border: 1.5px solid #A566FF;
+			border-radius: 5px;
+			color: white;
+		}
+		.mainBtn:hover {
+			background-color: #A566FF;
+		}
+}
 	</style>
 </head>
 
@@ -84,7 +105,6 @@
 	var ws;
 	window.onload = function(){
 		getRoom();
-		// createRoom();
 	}
 
 	function getRoom(){
@@ -98,57 +118,22 @@
 	}
 
 	function goRoom(number, name){
-		
-		window.open("/moveChat.do?roomName="+name+"&"+"roomNumber="+number, 'go', 'width=560, height=700')
-// 		var data = {'roomName': name, 'roomNumber': number}
-			
-// 		$.ajax({
-// 			url: '/moveChating.do',
-// 			data: data,
-// 			type: 'post',
-// 			success: function (res) {
-// 				if(res.pwdYn == "1"){
-// 					window.location.href='/inputPwd.do';
-// 				} else {
-// 					window.location.href="/moveChat.do?roomName="+res.roomData.roomName+"&"+"roomNumber="+res.roomData.roomNumber;
-// 				}
-// 			},
-// 			error : function(err){
-// 				console.log('error');
-// 				calbak(err);
-// 			}
-// 		});
+		window.open("/moveChat.do?roomName="+name+"&"+"roomNumber="+number, 'go', 'width=495, height=730');
 	}
 
-// 	function createChatingRoom(res){
-// 		if(res != null){
-// 			var tag = "<tr><th class='num'>순서</th><th class='room'>방 이름</th><th class='go'></th></tr>";
-// 			res.forEach(function(d, idx){
-// 				var rn = d.rname.trim();
-// 				var roomNumber = d.rno;
-// 				tag += "<tr>"+
-// 							"<td class='num'>"+(idx+1)+"</td>"+
-// 							"<td class='room'>"+ rn +"</td>"+
-// 							"<td class='go'><button type='button' onclick='goRoom(\""+roomNumber+"\", \""+rn+"\")'>참여</button></td>" +
-// 						"</tr>";	
-// 			});
-// 			$("#roomList").empty().append(tag);
-// 		}
-// 	}
 	function createChatingRoom(res){
 		if(res != null){
 			var tag = "";
 			res.forEach(function(d, idx){
 				var rn = d.rname.trim();
-				var roomNumber = d.rno;
-				var roomImg = d.imageUrl;
 				
-/* 				tag += "<td class='roomImg'><img src=" + roomImg + "/></td>";
-				tag += "<td class='go'><button type='button' onclick='goRoom(\""+roomNumber+"\", \""+rn+"\")'>참여</button></td>";	 */
+				var roomNumber = d.rno,
+				    roomImg = d.imageUrl,
+				    category = d.category,
+				    rowner = d.rowner;
  				
-				tag += "<div class='test'><img src=" + roomImg + "/><br><a class='testname' onclick='goRoom(\""+roomNumber+"\", \""+rn+"\")'>" + rn + "</a></div>";
+				tag += "<div class='test'><img class='img' src=" + roomImg + "/><br><p class='rCategory'>[" + category + "]</p><a class='rName' onclick='goRoom(\""+roomNumber+"\", \""+rn+"\")'>" + rn +"</a><a class='rRowner'>" + rowner + "</a></div>";
 			});
-// 			$("#roomList").empty().append(tag);
 			$("#roomList").empty().append(tag);
 		}
 	}
@@ -170,7 +155,8 @@
 	}
 	
 	function searchRoomPage(){
-		var data = {'roomName' : $('#roomName').val()};
+		var data = {'roomName' : $('#roomName').val(),
+					'category' : $("select[name=category]").val()};
 		commonAjax('/getRoom.do', data, 'post', function(result){
 			createChatingRoom(result);
 		});
@@ -186,13 +172,21 @@
 		<c:if test='${sessionScope.member ne null}'>
 			<span>${sessionScope.member.id} 님 로그인 됨<button onclick="logout();">로그아웃</button></span>
 		</c:if>
-		<h1>채팅방</h1>
+		<h1>스터디 룸</h1>
 			<table class="inputTable">
 				<tr>
-					<th>방 제목</th>
-					<th><input type="text" name="roomName" id="roomName"></th>
-					<th><button onclick="searchRoomPage();">검색</button>
-					<th><button onclick="createRoomPage();">방 생성</button></th>
+					<th>
+						<select name="category">
+							<option>전체</option>
+							<option>자격증</option>
+							<option>수능</option>
+							<option>임용고시</option>
+							<option>기타</option>
+						</select>
+					</th>
+					<th><input type="text" name="roomName" id="roomName" placeholder="제목"></th>
+					<th><button class="mainBtn" onclick="searchRoomPage();">검색</button></th>
+					<th><button class="mainBtn" onclick="createRoomPage();">방 생성</button></th>
 				</tr>
 			</table>
 		<div id="roomContainer" class="roomContainer">

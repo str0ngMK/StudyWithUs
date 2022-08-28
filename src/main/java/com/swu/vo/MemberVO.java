@@ -1,6 +1,7 @@
 package com.swu.vo;
 
 public class MemberVO {
+	private int mem_num;
 	private String user_name;
 	private String id;
 	private String user_pwd;
@@ -31,6 +32,14 @@ public class MemberVO {
 		this.address = address;
 
 	}*/
+	
+	public int getMem_num() {
+		return mem_num;
+	}
+
+	public void setMem_num(int mem_num) {
+		this.mem_num = mem_num;
+	}
 
 	public String getUser_name() {
 		return user_name;

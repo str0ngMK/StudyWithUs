@@ -30,6 +30,16 @@
 	    <property name="sqlSessionTemplate" ref="sqlSession" />
 	</bean>
 	
+	<bean id="timeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	    <property name="mapperInterface" value="com.swu.mapper.TimeMapper" />
+	    <property name="sqlSessionTemplate" ref="sqlSession" />
+	</bean>
+	
+	<bean id="serviceCenterMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	    <property name="mapperInterface" value="com.swu.mapper.ServiceCenterMapper" />
+	    <property name="sqlSessionTemplate" ref="sqlSession" />
+	</bean>
+	
    <mybatis-spring:scan base-package="com.swu.mapper"/>
 		
 </beans>

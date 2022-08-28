@@ -1,14 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- <%@ include file="/WEB-INF/views/includes/navigationbar.jsp" %> --%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<title>°í°´¼¾ÅÍ</title>
+<title>ê³ ê°ì„¼í„°</title>
 <style type="text/css">
 	#Accordion_wrap{
-  		box-sizing: border-box;   
+  		box-sizing: border-box;
+  		margin-bottom: 120px;
 	}
 	  
 	.que:first-child{
@@ -79,12 +80,15 @@
 	}
 	.left{
 		display: block;
-		width: 50%
+		width: 50%;
+	}
+	#left_bottom{
+		border-top: solid 1px black;
 	}
 	.right{
+		border-top: solid 1px black;
+		border-left: dashed 1px black;
 		display: block;
-		border: solid blue 1px;
-		background-color: blue;
 		width: 50%;
 	}
 	#tlqkf{
@@ -92,37 +96,140 @@
 		font-size: 40px;
 		color: white;
 	}
+	
+	.topAll{
+		width: 100%;
+		height: 100%;
+		display: flex;
+	}
+	.textLeft{
+		display: block;
+		width: 50%;
+	}
+	.textRight{
+		display: block;
+		width: 50%;
+	}
+	#topText{
+		font-weight: bold;
+		font-size: 30px;
+	}
+	
+	.table{
+		margin: 0 auto;
+	}
+	.tText{
+		font-size: 100px;
+	}
+	
+	#Ttitle{
+		width: 300px;
+		height: 30px;
+	}
+	#Twriter{
+		width: 300px;
+		height: 30px;
+	}
+	textarea{
+		width: 355px;
+		height: 200px;
+		resize: none;
+	}
+	#submit{
+		width: 100px;
+		margin-left: 200px;
+	}
+	
+	#ask_list{
+		width: 100%;
+	    border-collapse: collapse;
+	}
+	.th, .td{
+		border-bottom: 1px solid #444444;
+    	padding: 10px;
+    	text-align: center;
+	}
 </style>
 </head>
 <body>
-<h1>°í°´¼¾ÅÍ</h1>
+<h1>ê³ ê°ì„¼í„°</h1>
 <br>
-<h3>ÀÚÁÖ ¹¯´Â Áú¹®</h3>
+<div class="topAll">
+	<div class="textLeft">
+		<p id="topText">ìì£¼ ë¬»ëŠ” ì§ˆë¬¸</p>
+	</div>
+	<div class="textRight">
+		<p id="topText">ê´€ë¦¬ìì—ê²Œ ë¬¸ì˜í•˜ê¸°</p>
+	</div>
+</div>
 <div class="All">
 	<div class="left">
 		<div id="Accordion_wrap">
 		     <div class="que">
-		     	<span>È¸¿ø°¡ÀÔ ¾ÈµÈ´Ù ÀÌ»ç¶÷¾Æ</span>
+		     	<span>íšŒì›ê°€ì… ì•ˆëœë‹¤ ì´ì‚¬ëŒì•„</span>
 		     </div>
 		     <div class="anw">
-		     	<span>Á¤º¸ ´©¶ô¾øÀÌ ´Ù ÀÛ¼ºÇØ¶ó</span>
+		     	<span>ì •ë³´ ëˆ„ë½ì—†ì´ ë‹¤ ì‘ì„±í•´ë¼</span>
 		     </div>
 		     <div class="que">
-		     	<span>¾ÆÀÌµğ¸¦ ±î¸Ô¾ú´Ù ¾îÄ«³Ä</span>
+		     	<span>ì•„ì´ë””ë¥¼ ê¹Œë¨¹ì—ˆë‹¤ ì–´ì¹´ëƒ</span>
 		     </div>
 		     <div class="anw">
-		     	<span>±×°Ç ³ªµµ ¾îÂ¿ ¼ö°¡ ¾ø´Ù</span>
+		     	<span>ê·¸ê±´ ë‚˜ë„ ì–´ì©” ìˆ˜ê°€ ì—†ë‹¤</span>
 		     </div>
 		     <div class="que">
-		     	<span>ºñ¹Ğ¹øÈ£´Â ¾îÄ³ Ã£³Ä</span>
+		     	<span>ë¹„ë°€ë²ˆí˜¸ëŠ” ì–´ìº ì°¾ëƒ</span>
 		     </div>
 		     <div class="anw">
-		     	<span>¸Ş¸ğÀå¿¡ ½á³ö¶ó</span>
+		     	<span>ë©”ëª¨ì¥ì— ì¨ë†”ë¼</span>
 		     </div>
+		</div>
+		<p id="topText">ë¬¸ì˜ ë‚´ì—­</p>
+		<div id="left_bottom">
+			<form action="/askList.do" method="get">
+				<table id="ask_list">
+					<tr>
+						<th class="th">ì œëª©</th>
+						<th class="th">ì‘ì„±ì¼</th>
+						<th class="th">ìƒíƒœ</th>
+					</tr>
+					<tr>
+						<td class="td">ì•ˆë…•í•˜ì„¸ìš”</td>
+						<td class="td">2022.08.28</td>
+						<td class="td">ë‹µë³€ ëŒ€ê¸°</td>
+					</tr>
+					<tr>
+						<td class="td">ì•ˆë…•í•˜ì„¸ìš”</td>
+						<td class="td">2022.08.28</td>
+						<td class="td">ë‹µë³€ ëŒ€ê¸°</td>
+					</tr>
+				</table>
+			</form>
 		</div>
 	</div>
 	<div class="right">
-		<p id="tlqkf">¿À¸¥ÂÊ ¾æÈ£!</p>
+		<form action="/askService.do" method="post">
+			<table class="table">
+				<tr>
+					<td><p class="Ttext">ì œëª©</p></td>
+					<td><input type="text" id="Ttitle" name="title" placeholder="ì œëª©" required/></td>
+				</tr>
+				<tr>
+					<td><p class="Ttext">ì‘ì„±ì</p></td>
+					<td><input type="text" id="Twriter" value="${sessionScope.member.id}" readonly="readonly" required/></td>
+				</tr>
+				<tr>
+					<td><p class="Ttext">ë‚´ìš©</p></td>
+				</tr>
+				<tr>
+					<td colspan="2"><textarea name="content" placeholder="ë¬¸ì˜ ë‚´ìš©" required></textarea></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" id="submit" value="ì „ì†¡"/></td>
+				</tr>
+			</table>
+		</form>
 	</div>
 </div>
 </body>
@@ -130,7 +237,7 @@
 $(".que").click(function() {
 	   $(this).next(".anw").stop().slideToggle(300);
 	  $(this).toggleClass('on').siblings().removeClass('on');
-	  $(this).next(".anw").siblings(".anw").slideUp(300); // 1°³¾¿ ÆîÄ¡±â
+	  $(this).next(".anw").siblings(".anw").slideUp(300); // 1ê°œì”© í¼ì¹˜ê¸°
 	});
 </script>
 </html>
