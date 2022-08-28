@@ -13,15 +13,29 @@
 		}
 		.container{
 			width: 500px;
-			margin: 0 auto;
-			padding: 25px
+		}
+		#topline01{
+			display: flex;
+			align-items:center;
+			background-color: #D1B2FF;
+			height: 100px;
 		}
 		.container h1{
-			text-align: left;
-			padding: 5px 5px 5px 15px;
-			color: #A566FF;
-			border-left: 3px solid #A566FF;
-			margin-bottom: 20px;
+			margin: 0 auto;
+/* 			color: #5A5A5A; */
+			color: white;
+		}
+		#close{
+			margin-left: 10px;
+			width: 40px;
+			height: 40px;
+			background-color: transparent;
+			line-height: 50px;
+		}
+		#close:hover{
+			border-radius: 70%;
+			cursor:pointer;
+			box-shadow: 0px 0px 5px 2px gray;
 		}
 		.chating{
  			background-color: #F6F6F6; 
@@ -69,11 +83,41 @@
 			margin-left: 10px;
 			margin-top: 10px;
 		}
+		#topline02{
+			display: flex;
+			width: 500px;
+			height: 100px;
+			box-shadow: inset 0 20px 30px -20px #7758A5;
+		}
 		
+		#nowTime{
+			margin-left: 20px;
+			line-height: 100px;
+			font-size: 20px;
+		}
+		#ViewButton{
+			line-height: 100px;
+		}
+		#stop{
+			background-color: #D1B2FF;
+			border: 1.5px solid #A566FF;
+			border-radius: 5px;
+			color: white;
+			margin-left: 100px;
+			width: 80px;
+			height: 30px;
+		}
+		#stop:hover{
+			background-color: #A566FF;
+			cursor:pointer;
+		}
 		#timer{
+			display: flex; 
 			background-color: rgba(0,0,0,0);
 			width: 40px;
 			height: 40px;
+			margin-top: 30px;
+			margin-left: 30px;
 		}
 		#timer:hover {
 			cursor:pointer;
@@ -81,6 +125,33 @@
   			transition: transform 1s;
   			filter: brightness(70%);
 		}
+		#animation{
+			display: flex;
+			position:absolute;
+			top: 130px;
+			flex-direction: row;
+			color: black;
+			animation: compare 1s infinite alternate;
+			animation-timing-function:ease;
+		}
+		#animation p{
+			line-height: 40px;
+			font-size: 20px;
+			font-weight: 600;
+		}
+		@-webkit-keyframes compare{
+		  from{
+		    left:100px;
+		  }
+		  to{
+		    left:200px;
+		  }
+		}
+		#leftPointer{
+			width: 40px;
+			height: 40px;
+		}
+		
 		#sendBtn{
 			background-color: #D1B2FF;
 			border: 1.5px solid #A566FF;
@@ -187,8 +258,9 @@
 	var m;
     function msg_time() {   // 1초씩 카운트      
     	$("#timer").hide();
+    	$("#animation").hide();
         m = Math.floor(SetTime / 60) + "분" + (SetTime % 60) + "초"; // 남은 시간 계산         
-        var msg = "현재 공부 시간 <font color='red'>" + m + "</font> ing....";  
+        var msg = "<div id='nowTime'>현재 공부 시간 <font color='red'>" + m + "</font> ing....</div>";  
         var btn = "<button id='stop' onclick='stop_timer()'>공부 종료</button>";
         document.all.ViewTimer.innerHTML = msg;     // div 영역에 보여줌
         document.all.ViewButton.innerHTML = btn;
@@ -203,8 +275,8 @@
 		if (confirm("종료 하시겠습니까?") == true){    //확인
 			clearInterval(tid);
 			document.all.ViewTimer.innerHTML = btn;
-			$("#timer").hide();
 			SetTime--;
+			$("#timer").hide();
 			// 컨트롤러 이동
 			window.location.href="/submitTimer.do?rname=" + "${roomName}" + "&" + "rno=" + roomNumber + "&" + "time=" + SetTime;
 		}else{   //취소
@@ -216,17 +288,17 @@
 </script>
 <body>
 	<div id="container" class="container">
-		<h1>${roomName}의 채팅방</h1>
-		<div class="container">
-   			<h2>
-        		<div id="ViewTimer" name="ViewTimer">
-        		</div>
-        		<div id="ViewButton" name="ViewButton">
-        		</div>
-    		</h2>
-<!--     		<button id="start" onclick="start_timer()"><img class="timer" src="/resources/image/timer.png" onclick="start_timer()"/></button> -->
-			<img id="timer" src="/resources/image/timer.png" onclick="start_timer()"/>
+		<div id="topline01">
+			<img id="close" src="/resources/image/back_btn2.png" onClick='window.close()'/>
+			<h1>${roomName}</h1>
 		</div>
+		<div id="topline02">
+	    	<div id="ViewTimer" name="ViewTimer"></div>
+	    	<br>
+	    	<div id="ViewButton" name="ViewButton"></div>
+			<img id="timer" src="/resources/image/clock.png" onclick="start_timer()"/>
+			<div id="animation"><img id= "leftPointer" src="/resources/image/left_pointer.png"/><p>공부 시간을 저장해보세요!</p></div>
+    	</div>
 		<c:if test='${rowner eq sessionScope.member.id}'>
 			<button onclick="delete_btn()" id="roomDeleteBtn">방 삭제</button>
 		</c:if>
@@ -247,7 +319,7 @@
 		<div id="yourMsg">
 			<table class="inputTable">
 				<tr>
-					<th>메시지</th>
+					<th style="color: #5A5A5A;">메시지</th>
 					<th><input id="chatting" placeholder="보내실 메시지를 입력하세요."></th>
 					<th><button onclick="send()" id="sendBtn">보내기</button></th>
 				</tr>

@@ -8,7 +8,8 @@
 <title>고객센터</title>
 <style type="text/css">
 	#Accordion_wrap{
-  		box-sizing: border-box;   
+  		box-sizing: border-box;
+  		margin-bottom: 120px;
 	}
 	  
 	.que:first-child{
@@ -79,7 +80,10 @@
 	}
 	.left{
 		display: block;
-		width: 50%
+		width: 50%;
+	}
+	#left_bottom{
+		border-top: solid 1px black;
 	}
 	.right{
 		border-top: solid 1px black;
@@ -135,6 +139,16 @@
 		width: 100px;
 		margin-left: 200px;
 	}
+	
+	#ask_list{
+		width: 100%;
+	    border-collapse: collapse;
+	}
+	.th, .td{
+		border-bottom: 1px solid #444444;
+    	padding: 10px;
+    	text-align: center;
+	}
 </style>
 </head>
 <body>
@@ -170,30 +184,52 @@
 		     	<span>메모장에 써놔라</span>
 		     </div>
 		</div>
+		<p id="topText">문의 내역</p>
+		<div id="left_bottom">
+			<form action="/askList.do" method="get">
+				<table id="ask_list">
+					<tr>
+						<th class="th">제목</th>
+						<th class="th">작성일</th>
+						<th class="th">상태</th>
+					</tr>
+					<tr>
+						<td class="td">안녕하세요</td>
+						<td class="td">2022.08.28</td>
+						<td class="td">답변 대기</td>
+					</tr>
+					<tr>
+						<td class="td">안녕하세요</td>
+						<td class="td">2022.08.28</td>
+						<td class="td">답변 대기</td>
+					</tr>
+				</table>
+			</form>
+		</div>
 	</div>
 	<div class="right">
-	<form action="/askService.do" method="post">
-		<table class="table">
-			<tr>
-				<td><p class="Ttext">제목</p></td>
-				<td><input type="text" id="Ttitle" name="title" placeholder="제목"/></td>
-			</tr>
-			<tr>
-				<td><p class="Ttext">작성자</p></td>
-				<td><input type="text" id="Twriter" value="${sessionScope.member.id}" readonly="readonly" /></td>
-			</tr>
-			<tr>
-				<td><p class="Ttext">내용</p></td>
-			</tr>
-			<tr>
-				<td colspan="2"><textarea name="content" placeholder="문의 내용"></textarea></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type="submit" id="submit" value="전송"/></td>
-			</tr>
-		</table>
-	</form>
+		<form action="/askService.do" method="post">
+			<table class="table">
+				<tr>
+					<td><p class="Ttext">제목</p></td>
+					<td><input type="text" id="Ttitle" name="title" placeholder="제목" required/></td>
+				</tr>
+				<tr>
+					<td><p class="Ttext">작성자</p></td>
+					<td><input type="text" id="Twriter" value="${sessionScope.member.id}" readonly="readonly" required/></td>
+				</tr>
+				<tr>
+					<td><p class="Ttext">내용</p></td>
+				</tr>
+				<tr>
+					<td colspan="2"><textarea name="content" placeholder="문의 내용" required></textarea></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" id="submit" value="전송"/></td>
+				</tr>
+			</table>
+		</form>
 	</div>
 </div>
 </body>

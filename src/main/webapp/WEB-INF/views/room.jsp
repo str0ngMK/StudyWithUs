@@ -118,7 +118,7 @@
 	}
 
 	function goRoom(number, name){
-		window.open("/moveChat.do?roomName="+name+"&"+"roomNumber="+number, 'go', 'width=560, height=700');
+		window.open("/moveChat.do?roomName="+name+"&"+"roomNumber="+number, 'go', 'width=495, height=730');
 	}
 
 	function createChatingRoom(res){
