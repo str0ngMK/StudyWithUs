@@ -10,48 +10,13 @@ body {
 a {
     text-decoration: none;
 }
-.navbar {
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    /* background-color: aqua; */
-}
-.navbar_logo {
-    font-size: 24px;
-    font-family: 'Mochiy Pop One', sans-serif;
-    font-weight: 500;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 10px;
-}
-.tlogo {
-    color: rgb(180, 112, 203);
-}
-.imlogo {
-    width: 50px;
-    height: 50px;
-    margin: 5px;
-}
-.navbar_menu {
-    display: flex;
-    list-style: none;
-    padding-left: 0px;
-}
-.navbar_menu li {
-    padding: 10px 12px;
-    width: 100px;
-    padding-left: 10px;
-    margin-top: 7px;
-}
-.navbar_menu li>a {
-    color: black;
-}
-.navbar_menu li>a:hover {
-    color :rgb(180, 112, 203);
-    font-weight: 900;
+
+.navbar_login {
+	paosision : absolute:
+	right : 10%;
 }
 .blogin{
+	
     border : none;
     width: 120px;
     height: 50px;
@@ -135,7 +100,7 @@ label.right {
     top : 100px;
     left: 100px;
 }
-p {
+.param {
     width: 100%;
     height: 100%;
     font-size: 60px;
@@ -419,7 +384,6 @@ p {
 }
 
 
-
 @media screen and (max-width: 820px){
     .navbar_menu {
         display:none;
@@ -430,7 +394,7 @@ p {
         left: 48%;
         transform: translate(-37%, -48%);
     }
-    p {
+    .param {
         font-size: 50px;
     }
 

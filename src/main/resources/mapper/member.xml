@@ -6,6 +6,7 @@
 <mapper namespace="mapper.member">
 
 	<resultMap id="memResult" type="com.swu.vo.MemberVO">
+		<result property="mem_num" column="mem_num" />
 		<result property="user_name" column="user_name" />
 		<result property="id" column="id" />
 		<result property="user_pwd" column="user_pwd" />
@@ -34,7 +35,7 @@
 	<!-- 로그인 -->
 	<select id="login" resultType="com.swu.vo.MemberVO">
 	<![CDATA[
-		SELECT id, user_pwd
+		SELECT user_name, mem_num, id, user_pwd, nickname, contact, email, birth_date, gender, address
 		FROM
 		member_tbl
 		WHERE id = #{id}
@@ -49,22 +50,28 @@
       ]]>
 	</select> -->
 
-
-	<update id="updateMember" parameterType="com.swu.vo.MemberVO">
+	<!-- 회원 정보 수정 -->
+	<update id="memberUpdate" parameterType="com.swu.vo.MemberVO">
      <![CDATA[
 	     update member_tbl
-	     set user_pwd=#{user_pwd}, user_name=#{user_name}, email=#{email}
-	     where
-	     id=#{id}
+	     set user_name=#{user_name}, user_pwd=#{user_pwd}, nickname=#{nickname}, contact=#{contact}, email=#{email}, 
+	     birth_date=#{birth_date}, address=#{address}
+	     where id=#{id}
       ]]>
 	</update>
-
-	<delete id="deleteMember" parameterType="String">
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="memberDelete">
 	<![CDATA[
 	   delete from  member_tbl
-	   where
-	   id=#{id}
+	   where id=#{id}
 	]]>
 	</delete>
+	
+	<!-- 아이디중복체크 -->
+	<select id="idChk" resultType="int">
+	select count(*) from member_tbl
+	where id = #{id}
+	</select>
 
 </mapper>

@@ -55,7 +55,7 @@ public class NoticeController {
 		model.addAttribute("nview", vo);
 	}
 	
-		// 공지사항 수정1
+	// 공지사항 수정1
 	@RequestMapping(value = "notice/noticemodify", method = RequestMethod.GET)
 	public void noitceGetModify(@RequestParam("n_num") int n_num, Model model) throws Exception {
 		

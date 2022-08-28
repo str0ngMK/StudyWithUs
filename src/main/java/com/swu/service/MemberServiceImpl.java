@@ -44,6 +44,23 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.register(memberVO);
 	}
 
+	@Override
+	public void memberUpdate(MemberVO memberVO) throws Exception {
+		memberDAO.memberUpdate(memberVO);
+		
+	}
+
+	@Override
+	public void memberDelete(MemberVO memberVO) throws Exception {
+		memberDAO.memberDelete(memberVO);
+	}
+
+	@Override
+	public int idChk(MemberVO memberVO) throws Exception {
+		int result = memberDAO.idChk(memberVO);
+		return result;
+	}
+
 
 
 }

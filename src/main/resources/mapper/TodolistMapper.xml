@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.swu.mapper.TodoDAO">
+	
+	<select id="list" resultType="com.swu.vo.TodoVO">
+		select idx, id, contents, complete_yn from todolist_tbl where id = #{id}
+	</select>
+	
+	<insert id="register" parameterType="com.swu.vo.TodoVO">
+		insert into todolist_tbl(id, contents, complete_yn) 
+		values (#{id}, #{contents}, #{complete_yn}); 
+	</insert>
+	
+	<delete id="tododelete" parameterType="int">
+		delete from todolist_tbl
+		where idx = #{idx}
+	</delete>
+</mapper>
