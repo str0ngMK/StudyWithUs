@@ -234,21 +234,16 @@ public class ChatController {
 		return "createroom";
 	}
 	
-	/**
-	 * 고객센터 페이지 이동
-	 * @return
-	 */
-	@RequestMapping("/serviceCenter.do")
-	public String serviceCenter() {
-		return "serviceCenter";
-	}
-	
 	@RequestMapping("/inputPwd.do")
 	public String moveinputPwd() {
 		return "inputPwd";
 	}
 	
-	// 패스워드 체크
+	/**
+	 * 패스워드 체크
+	 * @param params
+	 * @return
+	 */
 	@RequestMapping("/pwdCheck.do")
 	@ResponseBody
 	public HashMap<String, Object> pwdCheck(@RequestParam HashMap<String, Object> params) {
