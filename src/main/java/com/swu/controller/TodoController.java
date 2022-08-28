@@ -22,7 +22,7 @@ public class TodoController {
 	private TodoService service;
 	
 	// todolist 정보 가져오기
-	@RequestMapping(value ="todo/adtodo.do", method = RequestMethod.GET)
+	@RequestMapping(value ="/todo/adtodo.do", method = RequestMethod.GET)
 	public void gettodo(Model model, HttpSession session) throws Exception{
 		
 		MemberVO memberSession = (MemberVO)session.getAttribute("member");
@@ -41,14 +41,14 @@ public class TodoController {
 	public String postRegister(TodoVO vo) throws Exception {
 		service.register(vo);
 		
-		return "redirect:/todo/adtodo.do";
+		return "redirect: /todo/adtodo.do";
 	}
 	
 	@RequestMapping(value="todo/deletetodo.do", method = RequestMethod.POST)
 	public String postDelete(int idx) throws Exception {
 		service.tododelete(idx);
 		
-		return "redirect:/todo/adtodo.do";
+		return "redirect: /todo/adtodo.do";
 	}
 	
 	

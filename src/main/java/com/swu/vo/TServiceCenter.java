@@ -7,6 +7,7 @@ public class TServiceCenter {
 	private String title;
 	private String content;
 	private String id;
+	private int status;
 	private Timestamp regdate;
 	
 	public int getMemNum() {
@@ -38,6 +39,12 @@ public class TServiceCenter {
 	}
 	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	} 
 
 }
