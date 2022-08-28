@@ -23,7 +23,7 @@
             <li>
                 <a href="/admin/adminmember.do">회원 관리</a>
             </li>
-            <li><a href="/admin/adminmservice.do">고객센터 관리</a></li>
+            <li><a href="/admin/adminservice.do">고객센터 관리</a></li>
         </ul>
     </nav>
         

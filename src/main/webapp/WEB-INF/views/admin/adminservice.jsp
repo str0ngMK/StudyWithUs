@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../includes/adminsidebar.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -9,6 +10,9 @@
 <style>
 	h1 {
 		padding:50px;
+	}
+	tr {
+		text-align : center;
 	}
 </style>
 </head>
@@ -27,6 +31,19 @@
 				</tr>
 			</thead>
 			<tbody>
+				<c:forEach items="${serviceList}" var="serviceList">
+					<tr>
+						<td>${serviceList.memNum}</td>
+						<td>${serviceList.title}</td>
+						<td>${serviceList.content}</td>
+						<td>${serviceList.id}</td>
+						<td>
+							<c:if test="${serviceList.status == 0}">답변대기</c:if>
+							<c:if test="${serviceList.status == 1}">답변완료</c:if>
+						</td>
+						<td><fmt:formatDate value="${serviceList.regdate}" pattern="yyyy-MM-dd" /></td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>

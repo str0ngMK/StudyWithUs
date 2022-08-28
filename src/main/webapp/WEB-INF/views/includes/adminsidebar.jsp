@@ -21,8 +21,8 @@
             </div>
         </div>
         <ul>
-            <li><a href="#">회원 관리</a></li>
-            <li><a href="#">1:1문의 관리</a></li>
+            <li><a href="/admin/adminmember.do">회원 관리</a></li>
+            <li><a href="/admin/adminservice.do">1:1문의 관리</a></li>
         </ul>
     </nav>
 </body>

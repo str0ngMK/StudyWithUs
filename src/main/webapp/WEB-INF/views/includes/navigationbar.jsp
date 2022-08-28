@@ -104,7 +104,17 @@
         	
         	<c:if test = "${member != null}">
         		<div class="logout_div">
-        		<div class="name"><a href="/login/loginForm">${member.id}님</a></div>
+        		
+        		<c:if test = "${member.authority == 0}">
+        		<div class="name">
+        		<a href="/user/membermanagement">${member.id}님</a>
+        		</div>
+        		</c:if>
+        		<c:if test = "${member.authority == 1}">
+        		<div class="name">
+        		<a href="/admin/adminmember.do">관리자</a>
+        		</div>
+        		</c:if>
         		<button class="blogin" onclick="location.href='/login/logout'">로그아웃</button>
         		</div>
         	</c:if>

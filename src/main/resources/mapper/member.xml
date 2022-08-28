@@ -35,7 +35,7 @@
 	<!-- 로그인 -->
 	<select id="login" resultType="com.swu.vo.MemberVO">
 	<![CDATA[
-		SELECT user_name, mem_num, id, user_pwd, nickname, contact, email, birth_date, gender, address
+		SELECT user_name, mem_num, id, user_pwd, nickname, contact, email, birth_date, gender, address, authority
 		FROM
 		member_tbl
 		WHERE id = #{id}

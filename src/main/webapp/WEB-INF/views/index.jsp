@@ -123,7 +123,7 @@
             <span class="inform">copyrigths 2022. StudyWithUs All Rights Reserved</span>
         </div>
     </footer>
-    <div class="qna">
+<!--     <div class="qna">
         <img class="imlogo2" src="resources/image/logo.png" alt="logo">
     </div>
     <div class="modal">
@@ -142,7 +142,7 @@
         <hr>
         <div class="m_footer">
             <button class="b_close">닫기</button>
-        </div>
+        </div> -->
     </div>
     <script>
         const modal = document.querySelector(".modal");

@@ -62,7 +62,7 @@
 			<div class="container">
 				<h3>${sessionScope.member.id}님, 멋진 TodoList를 완성해보세요!</h3>
 				<div class="put_info">
-				<form:form action="/todo/registertodo" method="post">
+				<form:form action="/todo/registertodo.do" method="post">
 				<input type="hidden" id="id" name="id" value="${sessionScope.member.id}" maxlength="24">
 				<input type="text" placeholder="할일을 입력해주세요" id="contents" name="contents" maxlength="24">
           		<input type="hidden" id="complete_yn" name="complete_yn" value="N">
@@ -84,7 +84,7 @@
               		<tbody id="todobody">
               			<c:forEach items="${todolist}" var="todolist">
              			<tr>
-             			<form:form action="/todo/deletetodo" method="post">
+             			<form:form action="/todo/deletetodo.do" method="post">
              			<%-- <td>${todolist.complete_yn}</td> --%>
              			<c:if test="${todolist.complete_yn == 'N'}">
              				<td><input type='checkbox' name='notdo'/></td>
