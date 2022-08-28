@@ -1,12 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%-- <%@ include file="/WEB-INF/views/includes/navigationbar.jsp" %> --%>
+<%@ include file="/WEB-INF/views/includes/navigationbar.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="/WEB-INF/views/redirect.jsp"></jsp:include>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>고객센터</title>
 <style type="text/css">
+	#serviceTitle{
+		font-weight: bold;
+		color: #8041D9;
+	}
+	#service{
+		width: 50px;
+		height: 50px;
+		margin-right: 15px;
+	}
+	
 	#Accordion_wrap{
   		box-sizing: border-box;
   		margin-bottom: 120px;
@@ -112,7 +123,7 @@
 	}
 	#topText{
 		font-weight: bold;
-		font-size: 30px;
+		font-size: 20px;
 	}
 	
 	.table{
@@ -144,7 +155,7 @@
 		width: 100%;
 	    border-collapse: collapse;
 	}
-	.th, .td{
+	.th_item, .td_item{
 		border-bottom: 1px solid #444444;
     	padding: 10px;
     	text-align: center;
@@ -152,86 +163,89 @@
 </style>
 </head>
 <body>
-<h1>고객센터</h1>
-<br>
-<div class="topAll">
-	<div class="textLeft">
-		<p id="topText">자주 묻는 질문</p>
-	</div>
-	<div class="textRight">
-		<p id="topText">관리자에게 문의하기</p>
-	</div>
-</div>
-<div class="All">
-	<div class="left">
-		<div id="Accordion_wrap">
-		     <div class="que">
-		     	<span>회원가입 안된다 이사람아</span>
-		     </div>
-		     <div class="anw">
-		     	<span>정보 누락없이 다 작성해라</span>
-		     </div>
-		     <div class="que">
-		     	<span>아이디를 까먹었다 어카냐</span>
-		     </div>
-		     <div class="anw">
-		     	<span>그건 나도 어쩔 수가 없다</span>
-		     </div>
-		     <div class="que">
-		     	<span>비밀번호는 어캐 찾냐</span>
-		     </div>
-		     <div class="anw">
-		     	<span>메모장에 써놔라</span>
-		     </div>
+<div class="container">
+	<h2 id="serviceTitle"><img id="service" src="/resources/image/service.png"/>고객센터</h2>
+	<br>
+	<div class="topAll">
+		<div class="textLeft">
+			<p id="topText">자주 묻는 질문</p>
 		</div>
-		<p id="topText">문의 내역</p>
-		<div id="left_bottom">
-			<form action="/askList.do" method="get">
-				<table id="ask_list">
+		<div class="textRight">
+			<p id="topText">관리자에게 문의하기</p>
+		</div>
+	</div>
+	<div class="All">
+		<div class="left">
+			<div id="Accordion_wrap">
+			     <div class="que">
+			     	<span>회원가입 안된다 이사람아</span>
+			     </div>
+			     <div class="anw">
+			     	<span>정보 누락없이 다 작성해라</span>
+			     </div>
+			     <div class="que">
+			     	<span>아이디를 까먹었다 어카냐</span>
+			     </div>
+			     <div class="anw">
+			     	<span>그건 나도 어쩔 수가 없다</span>
+			     </div>
+			     <div class="que">
+			     	<span>비밀번호는 어캐 찾냐</span>
+			     </div>
+			     <div class="anw">
+			     	<span>메모장에 써놔라</span>
+			     </div>
+			</div>
+			<p id="topText">문의 내역</p>
+			<div id="left_bottom">
+				<form action="/askList.do" method="get">
+					<table id="ask_list">
+						<tr>
+							<th class="th_item">제목</th>
+							<th class="th_item">작성일</th>
+							<th class="th_item">상태</th>
+						</tr>
+						<tr>
+							<td class="td_item">안녕하세요</td>
+							<td class="td_item">2022.08.28</td>
+							<td class="td_item">답변 대기</td>
+						</tr>
+						<tr>
+							<td class="td_item">안녕하세요</td>
+							<td class="td_item">2022.08.28</td>
+							<td class="td_item">답변 대기</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+		<div class="right">
+			<form action="/askService.do" method="post">
+				<table class="table">
 					<tr>
-						<th class="th">제목</th>
-						<th class="th">작성일</th>
-						<th class="th">상태</th>
+						<td><p class="Ttext">제목</p></td>
+						<td><input type="text" id="Ttitle" name="title" placeholder="제목" required/></td>
 					</tr>
 					<tr>
-						<td class="td">안녕하세요</td>
-						<td class="td">2022.08.28</td>
-						<td class="td">답변 대기</td>
+						<td><p class="Ttext">작성자</p></td>
+						<td><input type="text" id="Twriter" value="${sessionScope.member.id}" readonly="readonly" required/></td>
 					</tr>
 					<tr>
-						<td class="td">안녕하세요</td>
-						<td class="td">2022.08.28</td>
-						<td class="td">답변 대기</td>
+						<td><p class="Ttext">내용</p></td>
+					</tr>
+					<tr>
+						<td colspan="2"><textarea name="content" placeholder="문의 내용" required></textarea></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" id="submit" value="전송"/></td>
 					</tr>
 				</table>
 			</form>
 		</div>
 	</div>
-	<div class="right">
-		<form action="/askService.do" method="post">
-			<table class="table">
-				<tr>
-					<td><p class="Ttext">제목</p></td>
-					<td><input type="text" id="Ttitle" name="title" placeholder="제목" required/></td>
-				</tr>
-				<tr>
-					<td><p class="Ttext">작성자</p></td>
-					<td><input type="text" id="Twriter" value="${sessionScope.member.id}" readonly="readonly" required/></td>
-				</tr>
-				<tr>
-					<td><p class="Ttext">내용</p></td>
-				</tr>
-				<tr>
-					<td colspan="2"><textarea name="content" placeholder="문의 내용" required></textarea></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="submit" id="submit" value="전송"/></td>
-				</tr>
-			</table>
-		</form>
-	</div>
 </div>
+<%@ include file="/WEB-INF/views/includes/footer.jsp" %>
 </body>
 <script type="text/javascript">
 $(".que").click(function() {

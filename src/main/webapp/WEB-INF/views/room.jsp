@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/WEB-INF/views/includes/navigationbar.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,20 +10,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Room</title>
 	<style>
-		*{
-			margin:0;
-			padding:0;
-		}
- 		.container{ 
- 			margin: 0 auto; 
- 			padding: 50px;
- 		}
-		.container h1{
+/*  		*{  */
+/*  			margin:0;  */
+/*  			padding:0;  */
+/*  		}  */
+/*  		.container{  */
+/*  			margin: 0 auto;  */
+/*  			padding: 50px; */
+/*  		} */
+		.container h2{
 			text-align: left;
 			padding: 5px 5px 5px 15px;
 			color: #8041D9;
-			border-left: 3px solid #A566FF;
 			margin-bottom: 20px;
+			font-weight: bold;
+		}
+		#book{
+			width: 50px;
+			height: 50px;
+			margin-right: 15px;
 		}
 /* 		.roomContainer{ */
 /* 			background-color: #F6F6F6; */
@@ -169,10 +175,7 @@
 </script>
 <body>
 	<div class="container">
-		<c:if test='${sessionScope.member ne null}'>
-			<span>${sessionScope.member.id} 님 로그인 됨<button onclick="logout();">로그아웃</button></span>
-		</c:if>
-		<h1>스터디 룸</h1>
+		<h2><img id="book" src="/resources/image/studyBook.png"/>STUDY</h2>
 			<table class="inputTable">
 				<tr>
 					<th>
@@ -195,4 +198,6 @@
 		<div>
 		</div>
 	</div>
+<%@ include file="/WEB-INF/views/includes/footer.jsp" %>
+</body>
 </html>
