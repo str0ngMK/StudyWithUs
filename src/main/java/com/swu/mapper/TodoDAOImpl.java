@@ -19,9 +19,9 @@ public class TodoDAOImpl implements TodoDAO {
 	private static String namespace = "com.swu.mapper.TodoDAO";
 
 	@Override
-	public List<TodoVO> list(String id) throws Exception {
+	public List<TodoVO> list(MemberVO memberSession) throws Exception {
 		List<TodoVO> todoList = null;
-		todoList = sql.selectList(namespace + ".list", id);
+		todoList = sql.selectList(namespace + ".list", memberSession);
 		return todoList;
 	}
 

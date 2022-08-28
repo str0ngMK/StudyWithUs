@@ -73,5 +73,11 @@
 	select count(*) from member_tbl
 	where id = #{id}
 	</select>
+	
+	<!-- 회원목록 -->
+	<select id="memberList" resultType="com.swu.vo.MemberVO">
+		SELECT user_name, mem_num, id, user_pwd, nickname, contact, email, birth_date, gender, address, reg_date, update_date
+		FROM member_tbl
+	</select>
 
 </mapper>

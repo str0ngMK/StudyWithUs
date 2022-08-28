@@ -1,6 +1,5 @@
 package com.swu.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -24,27 +23,28 @@ public class TodoController {
 	
 	// todolist 정보 가져오기
 	@RequestMapping(value ="todo/adtodo.do", method = RequestMethod.GET)
-	public void gettodo(Model model) throws Exception{
-	
+	public void gettodo(Model model, HttpSession session) throws Exception{
+		
+		MemberVO memberSession = (MemberVO)session.getAttribute("member");
+		
 		/*HttpSession session = req.getSession();*/
-		String id = "oreo123";
-		
-		List<TodoVO> todolist = service.list(id);
-		
+		/* String id = "${sessionScope.member.id}"; */
+	
+		List<TodoVO> todolist = service.list(memberSession);
 		
 		model.addAttribute("todolist", todolist);
 		model.addAttribute("todo", new TodoVO());
 			
 	}
 	
-	@RequestMapping(value="todo/registertodo", method = RequestMethod.POST)
+	@RequestMapping(value="todo/registertodo.do", method = RequestMethod.POST)
 	public String postRegister(TodoVO vo) throws Exception {
 		service.register(vo);
 		
 		return "redirect:/todo/adtodo.do";
 	}
 	
-	@RequestMapping(value="todo/deletetodo", method = RequestMethod.POST)
+	@RequestMapping(value="todo/deletetodo.do", method = RequestMethod.POST)
 	public String postDelete(int idx) throws Exception {
 		service.tododelete(idx);
 		

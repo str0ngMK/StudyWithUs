@@ -1,5 +1,7 @@
 package com.swu.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -59,6 +61,11 @@ public class MemberServiceImpl implements MemberService {
 	public int idChk(MemberVO memberVO) throws Exception {
 		int result = memberDAO.idChk(memberVO);
 		return result;
+	}
+
+	@Override
+	public List<MemberVO> memberList() throws Exception {
+		return memberDAO.memberList();
 	}
 
 

@@ -8,7 +8,7 @@ import com.swu.vo.TodoVO;
 public interface TodoService {
 	
 	//Todolist 목록 
-	public List<TodoVO> list(String id) throws Exception;
+	public List<TodoVO> list(MemberVO memberSession) throws Exception;
 
 	//Todolist 입력
 	public void register(TodoVO vo) throws Exception;
