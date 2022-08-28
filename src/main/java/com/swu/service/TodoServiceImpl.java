@@ -16,9 +16,9 @@ public class TodoServiceImpl implements TodoService {
 	private TodoDAO todoDAO;
 
 	@Override
-	public List<TodoVO> list(String id) throws Exception {
+	public List<TodoVO> list(MemberVO memberSession) throws Exception {
 		List todoList = null;
-		todoList = todoDAO.list(id);
+		todoList = todoDAO.list(memberSession);
 		return todoList;
 	}
 

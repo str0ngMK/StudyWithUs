@@ -3,7 +3,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="includes/navigationbar.jsp" %>
 <%@ page import="java.util.*" %>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>

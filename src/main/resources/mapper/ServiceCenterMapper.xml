@@ -20,5 +20,11 @@
 		   		    #{id},
 		   		    now())
 	</insert>
+	
+	<!-- 서비스 센터 목록 -->
+	<select id="serviceList" resultType="com.swu.vo.MemberVO">
+		SELECT mem_num, title, content, id, status, regdate
+		FROM servicecenter
+	</select>
 
 </mapper>

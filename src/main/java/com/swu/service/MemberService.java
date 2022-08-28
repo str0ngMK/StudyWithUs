@@ -1,5 +1,7 @@
 package com.swu.service;
 
+import java.util.List;
+
 import org.springframework.dao.DataAccessException;
 
 import com.swu.vo.LoginReqVo;
@@ -26,4 +28,7 @@ public interface MemberService {
 	
 	//아이디 중복 체크
 	public int idChk(MemberVO memberVO) throws Exception;
+	
+	//회원 목록 불러오기
+	public List<MemberVO> memberList() throws Exception;
 }

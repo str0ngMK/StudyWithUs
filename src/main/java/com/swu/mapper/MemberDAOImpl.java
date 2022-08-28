@@ -1,5 +1,7 @@
 package com.swu.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -52,6 +54,11 @@ public class MemberDAOImpl implements MemberDAO {
 	public int idChk(MemberVO memberVO) throws Exception {
 		int result = sqlSession.selectOne("mapper.member.idChk", memberVO);
 		return result;
+	}
+
+	@Override
+	public List<MemberVO> memberList() throws Exception {
+		return sqlSession.selectList("mapper.member.memberList");
 	}
 
 }

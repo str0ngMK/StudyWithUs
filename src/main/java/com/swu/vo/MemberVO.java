@@ -1,5 +1,7 @@
 package com.swu.vo;
 
+import java.util.Date;
+
 public class MemberVO {
 	private int mem_num;
 	private String user_name;
@@ -10,14 +12,13 @@ public class MemberVO {
 	private String email;
 	private String birth_date;
 	private int gender;
-	private String reg_date;
-	private String update_date;
+	private Date reg_date;
+	private Date update_date;
 	private String address;
-	private int authority;
 	private int study_time;
 	private int reported_user;
 	private String to_do_list;
-	
+	private int authority;
 
 	/*public MemberVO(String user_name, String id, String user_pwd, String nickname, String contact, String email,
 			String birth_date, int gender, String address) {
@@ -113,19 +114,19 @@ public class MemberVO {
 		this.address = address;
 	}
 
-	public String getReg_date() {
+	public Date getReg_date() {
 		return reg_date;
 	}
 
-	public void setReg_date(String reg_date) {
+	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
 	}
 
-	public String getUpdate_date() {
+	public Date getUpdate_date() {
 		return update_date;
 	}
 
-	public void setUpdate_date(String update_date) {
+	public void setUpdate_date(Date update_date) {
 		this.update_date = update_date;
 	}
 
