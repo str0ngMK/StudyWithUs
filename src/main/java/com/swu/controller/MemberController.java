@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.swu.service.MemberService;
@@ -37,16 +38,17 @@ public class MemberController {
 		if (login == null) {
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg", false);
-		} else {
-			session.setAttribute("member", login);
-		}
-		return "/room";
+			return "redirect:/login/loginForm";
+		} 
+		
+		session.setAttribute("member", login);
+		return "redirect:/index";
 	}
 
 	// 화면에 로그인창 보이게하기
 	@RequestMapping(value = "/login/loginForm", method = RequestMethod.GET)
 	public void login(Locale locale, Model model) throws Exception {
-
+		
 	}
 
 	// 로그아웃
@@ -60,8 +62,16 @@ public class MemberController {
 	@RequestMapping(value = "/user/joinform", method = RequestMethod.POST)
 	public String postRegister(MemberVO memberVO) throws Exception {
 		logger.info("post register");
-		memberService.register(memberVO);
-		System.out.println(memberVO.getUser_name());
+		int result = memberService.idChk(memberVO);
+		try {
+			if(result == 1) {
+				return "/user/joinform";
+			} else {
+				memberService.register(memberVO);
+			}
+		} catch(Exception e) {
+			throw new RuntimeException();
+		}
 
 		return "redirect:/login/loginForm";
 	}
@@ -70,5 +80,95 @@ public class MemberController {
 	@RequestMapping(value = "/user/joinform", method = RequestMethod.GET)
 	public void getRegister() throws Exception {
 		logger.info("get register");
+	}
+	
+	// 회원가입약관
+	@RequestMapping(value = "/user/joinagreeterms", method = RequestMethod.GET)
+	public void agree() throws Exception {
+		logger.info("get agreement");
+	}
+
+	// 아이디찾기
+	@RequestMapping(value = "/user/findid", method = RequestMethod.GET)
+	public void findid() throws Exception {
+		logger.info("find id");
+	}
+
+	// 비밀번호 찾기
+	@RequestMapping(value = "/user/findpwd", method = RequestMethod.GET)
+	public void findpwd() throws Exception {
+		logger.info("find pwd");
+	}
+	
+	// 아이디중복확인
+//	@ResponseBody
+//	@RequestMapping(value = "/idChk", method = RequestMethod.POST)
+//	public int idChk(MemberVO vo) throws Exception {
+//		int result = memberService.idChk(vo);
+//		return result;
+//	}
+	
+	//회원정보관리
+	@RequestMapping(value = "/user/membermanagement", method = RequestMethod.GET)
+	public void membermanagement() throws Exception {
+		logger.info("member management");
+	}
+	
+	//회원정보수정
+	@RequestMapping(value = "/user/modifymemberinfo", method = RequestMethod.GET)
+	public String modifyGetmemberinfo() throws Exception {
+		logger.info("modify Get member info");
+			
+		return "user/modifymemberinfo";
+	}
+	
+	//회원정보수정
+	@RequestMapping(value = "/user/modifymemberinfo", method = RequestMethod.POST)
+	public String modifyPostmemberinfo(MemberVO memberVO, HttpSession session) throws Exception {
+		logger.info("modify POST member info");
+		
+		memberService.memberUpdate(memberVO);
+		
+		session.invalidate();
+		
+		return "redirect:/index";
+	}
+	
+	//회원탈퇴화면
+	@RequestMapping(value = "/user/memberdeleteview", method = RequestMethod.GET)
+	public String modifyGetmemberdel() throws Exception {
+		logger.info("delete Get member info");
+			
+		return "user/memberdeleteview";
+	}
+	
+	//회원탈퇴화면
+		@RequestMapping(value = "/user/memberdeleteview", method = RequestMethod.POST)
+		public String modifyPostmemberdel(MemberVO memberVO, HttpSession session, RedirectAttributes rttr) throws Exception {
+			logger.info("delete Post member info");
+			
+			//세션에 있는 member를 가져와 member변수에 넣어줌
+			MemberVO member = (MemberVO)session.getAttribute("member");
+			//세션 비밀번호
+			String sessionPass = member.getUser_pwd();
+			//vo로 들어오는 비밀번호
+			String voPass = memberVO.getUser_pwd();
+			
+			if(!(sessionPass.equals(voPass))) {
+				rttr.addFlashAttribute("msg", false);
+				return "redirect:/user/memberdeleteview";
+			}
+			memberService.memberDelete(memberVO);
+			session.invalidate();
+			
+			return "redirect:/index";
+	}
+		
+	//아이디 중복 체크
+	@ResponseBody
+	@RequestMapping(value="/idChk", method = RequestMethod.POST)
+	public int idChk(MemberVO memberVO) throws Exception {
+		int result = memberService.idChk(memberVO);
+		return result;
 	}
 }

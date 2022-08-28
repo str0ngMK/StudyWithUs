@@ -6,11 +6,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Study With Us 약관동의</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="jquery-3.4.1.js"></script>
+  <link href="../resources/css/style.css" rel="stylesheet">
   <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
-
+<style>
+	.join-agree {
+	  position : absolute;
+	  top : 10%;
+	}
+</style>
 <body>
 
   <div class="join-agree">
@@ -27,7 +31,7 @@
       </label> 
     </form>-->
 
-    <form action="">
+  
 
       <label for="agree_all">
         <input type="checkbox" name="agree_all" id="agree_all">
@@ -363,11 +367,8 @@
       </div>
 
       <div class="btn-area">
-        <button id="btn" type="submit">약관동의 및 본인인증하기</button>
+        <button type="submit" onclick="location.href='/user/joinform'">약관동의 및 회원가입하기</button>
       </div>
-
-
-    </form>
 
   </div>
 
@@ -382,6 +383,13 @@
       agreeChk[i].checked = e.target.checked;
     }
   });
+  
+ 	/* $(document).ready(function() {
+		$("#btn").on("click", function() {
+			location.href = "/user/joinform";
+			alert("이동됨");
+		})
+	});  */
 </script>
 
 </html>

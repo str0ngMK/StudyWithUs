@@ -8,10 +8,10 @@
 <style>
 	h1 {
 		text-align : center;
-		margin-bottom : 20px;
+		margin-bottom : 50px;
 	}
 	.container {
-		margin-top: 50px;
+		margin-top: 80px;
 	}
 	table {
 	 text-align:center;
@@ -27,10 +27,32 @@
 	  
 	}
 	#bwrite {
-	 background-color : purple;
+	 background-color: rgb(180, 112, 203);
 	 width : 100px;
-	 height : 50px;
+	 height : 40px;
 	 float : right;
+	 border:none;
+	}
+	.search {
+	 display : flex;
+	 margin-top : 50px;
+	 margin-bottom : 100px;
+	}
+	#searchselect {
+		width : 200px;
+		margin-right : 10px;
+	}
+	#searchinput {
+		width : 400px;
+	}
+	#searchBtn {
+		background-color: rgb(180, 112, 203);
+		width : 100px;
+		color : white;
+		justify-content : space-between;
+		boarder : none;
+		margin-left : 20px;
+		border:none;
 	}
 </style>
 <body>
@@ -89,18 +111,18 @@
 		</nav>
        	
        	<div class="search">
-		 <select name="searchType">
+		 <select class="form-control" name="searchType" id="searchselect">
 		     <option value="n_title" <c:if test="${page.searchType eq 'n_title'}">selected</c:if>>제목</option>
 		      <option value="n_content" <c:if test="${page.searchType eq 'n_content'}">selected</c:if>>내용</option>
 		     <option value="n_title_n_content" <c:if test="${page.searchType eq 'n_title_n_content'}">selected</c:if>>제목+내용</option>
 		 </select>
 		 
-		 <input type="text" name="keyword" value="${page.keyword}"/>
+		 <input class="form-control" id="searchinput" type="text" name="keyword" value="${page.keyword}"/>
 		 
 		 <button type="button" id="searchBtn">검색</button>
 		</div>	
 		</div>
-		
+		<%@ include file="../includes/footer.jsp" %>
 		
 		<script>
 

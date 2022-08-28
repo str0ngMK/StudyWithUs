@@ -40,7 +40,7 @@
 
 				<h1>회원 정보 수정</h1>
 
-				<form class="validation-form" action="/user/modifymemberinfo" method="post" id="regForm" novalidate>
+				<form class="validation-form" action="/user/memberdeleteview" method="post" id="regForm" novalidate>
 
 					<div class="row">
 						<div class="col-md-6 mb-3">
@@ -48,7 +48,7 @@
 							<div>
 								<label for="user_name">이름</label> <input type="text"
 									class="form-control" id="user_name" name="user_name"
-								    value="${member.user_name}">
+								    value="${member.user_name}" readonly="readonly">
 							</div>
 							
 							<label for="name">아이디</label>
@@ -61,21 +61,16 @@
 								class="form-control" id="user_pwd" name="user_pwd" required>
 							</div>
 							<div>
-								<label for="name">비밀번호 확인</label> <input type="password"
-									class="form-control" id="pwd_check" name="pwd_check"
-									placeholder="" value="" required>
-							</div>
-							<div>
 								<label for="nickname">닉네임</label> <input type="text"
 									class="form-control" id="nickname" name="nickname"
-									placeholder="" value="${member.nickname}" required>
+									placeholder="" value="${member.nickname}" readonly="readonly">
 							</div>
 							<div>
 								<label for="name">휴대폰번호</label>
 								<!--자동완성-->
 								<input type="text" class="form-control" id="contact"
-									name="contact" placeholder="" value="${member.contact}" required
-									onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');">
+									name="contact" placeholder="" value="${member.contact}" 
+									onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');" readonly="readonly">
 							</div>
 
 						</div>
@@ -85,12 +80,12 @@
 					<div class="mb-3">
 						<label for="email">이메일</label> <input type="email"
 							class="form-control" id="email" name="email"
-							value="${member.email}" required>
+							value="${member.email}" readonly="readonly">
 					</div>
 					
 					<div class="mb-3">
 					<label for="birth">생년월일</label><br>
-					<input class="form-control" type="text" id="birth_date" name="birth_date" value="${member.birth_date}">
+					<input class="form-control" type="text" id="birth_date" name="birth_date" value="${member.birth_date}"  readonly="readonly">
 					</div>
 					
 					<div class="mb-3">
@@ -106,7 +101,7 @@
 
 					<div class="mb-3">
 						<label for="address">주소</label> <input type="text"
-							class="form-control" id="address" name="address" value="${member.address}" required>
+							class="form-control" id="address" name="address" value="${member.address}" readonly="readonly">
 					</div>
 
 					<hr class="mb-4">
@@ -114,39 +109,31 @@
 
 					<div class="mb-4"></div>
 					<div class="btn-area">
-						<button type="reset">다시작성</button>
-						<br> <br>
-						<button onclick="modifyForm()">수정완료</button>
+						<button id="submit" type="submit">회원탈퇴</button>
 						<br> <br>
 						<button onclick="/index">메인화면</button>
 					</div>
 				</form>
-
 			</div>
 		</div>
 
 	<script>
-		function modifyForm() {
+		
+		$(document).ready(function() {
 			var user_pwd = document.getElementById("user_pwd");
-	    	var check_pwd = document.getElementById("check_pwd");
 			
-			//비밀번호 확인란 공백 확인
-	    	  if ($("#password_check").val() == "") {
-	    	    alert("비밀번호 확인란을 입력해주세요");
-	    	    $("#password_check").focus();
-	    	    return false;
-	    	  }
-
-	    	  //비밀번호 서로확인
-	    	  if ($("#user_pwd").val() != $("#pwd_check").val()) {
-	    	    alert("비밀번호가 상이합니다");
-	    	    $("#user_pwd").val("");
-	    	    $("#pwd_check").val("");
-	    	    $("#user_pwd").focus();
-	    	    return false;
-	    	  }
-		}
-	
+			$("#submit").on("click", function() {
+			if(user_pwd === "${member.user_pwd}"){
+				alert("회원정보 탈퇴가 정상적으로 이루어졌습니다.");
+			} else {
+				alert("비밀번호가 다릅니다.");
+			}
+			});
+			
+			
+		});
+		
+		
 	</script>
 
 </body>

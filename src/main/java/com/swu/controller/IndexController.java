@@ -17,4 +17,12 @@ public class IndexController {
 			logger.info("index");
 			
 		}
+		
+		// 에러 페이지
+		@RequestMapping(value = "/error", method = RequestMethod.GET)
+		public void getError() throws Exception {
+			logger.info("error");
+			
+		}
+		
 }
