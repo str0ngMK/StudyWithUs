@@ -30,9 +30,11 @@
         </div>
         
         <div align="right">
+        <c:if test = "${member.authority == 1}">
         <input type="button" value="수정하기" class="btn btn-sm btn-primary" style="background-color: purple" onclick="location.href='/notice/noticemodify?n_num=${nview.n_num}'"/>
-        <input type="button" value="목록으로" class="btn btn-sm btn-primary" style="background-color: purple" onclick="location.href='/notice/noticelistpage?num=1'"/>
         <input type="button" value="삭제하기" class="btn btn-sm btn-primary" style="background-color: purple" onclick="location.href='/notice/delete?n_num=${nview.n_num}'"/>
+        </c:if>
+        <input type="button" value="목록으로" class="btn btn-sm btn-primary" style="background-color: purple" onclick="location.href='/notice/noticelistpage?num=1'"/>
         </div>
         </form>
   </div>

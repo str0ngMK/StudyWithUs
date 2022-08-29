@@ -78,7 +78,7 @@
         	</tbody>
         </table>
         
-        <!-- 관리자만 버튼이 보이도록 수정 예정!  -->
+        <!-- 관리자만 버튼이 보이도록 구현 -->
         <div class="write">
         	<c:if test = "${member.authority == 1}">
         	<input type="button" value="작성하기" id="bwrite" class="btn btn-sm btn-primary" onclick="location.href='/notice/noticewrite'"/>
