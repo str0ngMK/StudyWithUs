@@ -22,7 +22,7 @@
 			var tag = "";
 			res.forEach(function(d, idx){
 				var id = d.id,
-				var memNum = d.memNum;
+					memNum = d.memNum;
  				
 				tag += "<div> memNum = " + memNum + "</div>";
 			});

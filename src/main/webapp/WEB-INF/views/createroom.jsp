@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/includes/navigationbar.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="/WEB-INF/views/redirect.jsp"></jsp:include>
 <meta charset="UTF-8">
 <title>create room</title>
 <style>
@@ -117,6 +119,7 @@
 	</tr>
 </table>
 </form>
+<%@ include file="/WEB-INF/views/includes/footer.jsp" %>
 </body>
 <script type="text/javascript">
 	function back() {
