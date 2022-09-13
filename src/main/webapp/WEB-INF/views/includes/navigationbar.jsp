@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../resources/css/bootstrap.css">
     <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
 	<style>
-	#title {
+	#title2 {
 		font-size : 30px;
 		font-weight : 700;
 		margin-left : 20px;
@@ -72,7 +72,7 @@
     
     <nav class="navbar navbar-expand-lg navbar-light">
   	<div class="container-fluid">
-    <a class="navbar-brand" id="title" href="/index">
+    <a class="navbar-brand" id="title2" href="/index">
     <img src="../resources/image/logo.png" width="50" height="50" class="d-inline-block align-text-top" id="logo">
     Sweeter</a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -119,7 +119,7 @@
         		</div>
         	</c:if>
         </div>
+        </div>
 </nav>
-</div>
 </body>
 </html>
