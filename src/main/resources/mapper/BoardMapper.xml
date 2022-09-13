@@ -6,8 +6,8 @@
  	
  	<!-- 게시물 등록 -->
     <insert id="enroll">
-        insert into swu_board(title, content, writer)
-        values (#{title}, #{content}, #{writer})
+        insert into swu_board(title, category, content, writer)
+        values (#{title}, #{category}, #{content}, #{writer})
     </insert>
  	
  	<!-- 게시판 목록 읽어오기 -->
@@ -22,7 +22,7 @@
  	
  	<!-- 게시물 수정하기 -->
     <update id="modify">
-        update swu_board set title = #{title}, content = #{content}, updatedate = now() where bno = #{bno}
+        update swu_board set title = #{title}, category = #{category} ,content = #{content}, updatedate = now() where bno = #{bno}
     </update>
     
     <!-- 게시물 삭제하기 -->
@@ -33,7 +33,7 @@
     <!-- 게시물 목록(페이징) -->
     <select id="getListPaging" resultType="com.swu.vo.BoardVO">
         select * from (
-                select bno, title, writer, regdate, viewnum  
+                select bno, title, category, writer, regdate, viewnum  
                 from swu_board 
                 <if test="keyword != null">
                     <include refid="criteria"></include>
@@ -42,7 +42,7 @@
         limit #{skip},#{amount}
     </select>
     
-    <!-- 게시물 총 개숫 -->
+    <!-- 게시물 총 개수 -->
     <select id="getTotal" resultType="int">
         select count(*) from swu_board
         <if test="keyword != null">

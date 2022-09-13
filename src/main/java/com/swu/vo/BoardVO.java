@@ -10,6 +10,9 @@ public class BoardVO {
     /* 게시판 제목 */
     private String title;
     
+    /* 게시판 주제 */
+    private int category;
+    
     /* 게시판 내용 */
     private String content;
     
@@ -37,6 +40,14 @@ public class BoardVO {
 
 	public void setBno(int bno) {
 		this.bno = bno;
+	}
+	
+	public int getCategory() {
+		return category;
+	}
+
+	public void setCategory(int category) {
+		this.category = category;
 	}
 
 	public String getTitle() {
@@ -105,10 +116,9 @@ public class BoardVO {
 
 	@Override
 	public String toString() {
-		return "BoardVO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer + ", regdate="
-				+ regdate + ", updateDate=" + updateDate + ", viewnum=" + viewnum + ", del_yn=" + del_yn
-				+ ", declaration=" + declaration + "]";
+		return "BoardVO [bno=" + bno + ", title=" + title + ", category=" + category + ", content=" + content
+				+ ", writer=" + writer + ", regdate=" + regdate + ", updateDate=" + updateDate + ", viewnum=" + viewnum
+				+ ", del_yn=" + del_yn + ", declaration=" + declaration + "]";
 	}
-	
 	
 }
