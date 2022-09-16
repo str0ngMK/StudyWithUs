@@ -178,22 +178,22 @@
 		<div class="left">
 			<div id="Accordion_wrap">
 			     <div class="que">
-			     	<span>회원가입 안된다 이사람아</span>
+			     	<span>회원가입이 되질 않습니다.</span>
 			     </div>
 			     <div class="anw">
-			     	<span>정보 누락없이 다 작성해라</span>
+			     	<span>정보 입력란에 누락된 정보가 있는지 확인해보세요. <br>자세한 사항은 관리자에게 문의 바랍니다.</span>
 			     </div>
 			     <div class="que">
-			     	<span>아이디를 까먹었다 어카냐</span>
+			     	<span>스터디룸을 증설하고 싶습니다.</span>
 			     </div>
 			     <div class="anw">
-			     	<span>그건 나도 어쩔 수가 없다</span>
+			     	<span>로그인 ▷ 상단 '스터디 참여' 클릭 ▷ '방 생성' 버튼 클릭</span>
 			     </div>
 			     <div class="que">
-			     	<span>비밀번호는 어캐 찾냐</span>
+			     	<span>회원 탈퇴를 하고싶습니다.</span>
 			     </div>
 			     <div class="anw">
-			     	<span>메모장에 써놔라</span>
+			     	<span>로그인 후 마이페이지 ▷ 회원 탈퇴</span>
 			     </div>
 			</div>
 			<p id="topText">문의 내역</p>

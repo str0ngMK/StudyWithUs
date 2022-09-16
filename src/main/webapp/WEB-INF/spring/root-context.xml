@@ -40,6 +40,11 @@
 	    <property name="sqlSessionTemplate" ref="sqlSession" />
 	</bean>
 	
+	<bean id="studyVideoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	    <property name="mapperInterface" value="com.swu.mapper.StudyVideoMapper" />
+	    <property name="sqlSessionTemplate" ref="sqlSession" />
+	</bean>
+	
    <mybatis-spring:scan base-package="com.swu.mapper"/>
 		
 </beans>
